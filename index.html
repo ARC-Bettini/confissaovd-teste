@@ -194,30 +194,24 @@ progress::-moz-progress-bar { background: var(--gold); border-radius: 10px; }
 .exam-theme h1 { font-size: 19px; line-height: 1.4; margin-top: 7px; }
 .exam-theme .text-button { min-height: 35px; font-size: 9px; padding-block: 4px; color: var(--brown); }
 .exam-theme .text-button .icon { width: 12px; height: 12px; }
-.gesture-help { display: flex; align-items: center; justify-content: space-between; padding-inline: 13px; font-size: 10px; color: var(--muted); margin-bottom: 10px; }
-.gesture-help strong { color: var(--navy); font-weight: 400; }
 .swipe-card { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 23px; min-height: 245px; padding: 32px 23px; border: 1px solid var(--gold); border-radius: 22px; background: var(--cream); text-align: center; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; transition: transform .15s, border-color .15s; box-shadow: 0 5px 0 #C69A541A; }
 .swipe-card.is-dragging { cursor: grabbing; }
 .swipe-question { font: 500 29px/1.4 var(--subtitle); color: var(--navy); }
 .current-answer { font-size: 10px; color: var(--muted); line-height: 1.7; }
-.swipe-feedback { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: var(--warm-white); border: 1px solid var(--gold); border-radius: 12px; padding: 4px 10px; font: 600 11px/1.6 var(--title); opacity: 0; pointer-events: none; }
 .swipe-card[data-swipe="yes"] { transform: translateX(-8px) rotate(-.5deg); border-color: var(--brown); }
 .swipe-card[data-swipe="no"] { transform: translateX(8px) rotate(.5deg); border-color: var(--brown); }
 .swipe-card[data-swipe="skip"] { transform: translateY(-8px); border-color: var(--brown); }
-.swipe-card[data-swipe="yes"] .feedback-yes, .swipe-card[data-swipe="no"] .feedback-no, .swipe-card[data-swipe="skip"] .feedback-skip { opacity: 1; }
 .answer-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 18px; }
 .answer-button { display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 70px; padding: 11px 8px; border: 1px solid var(--gold); border-radius: 16px; background: var(--warm-white); color: var(--navy); }
-.answer-button > span:not(.up-arrow) { font: 600 17px/1.3 var(--title); }
-.answer-button small { display: block; font: 9px/1.7 var(--body); margin-top: 4px; }
+.answer-button > span { font: 600 17px/1.3 var(--title); }
 .answer-button .icon { width: 16px; height: 16px; }
 .answer-yes { color: var(--cream); background: var(--navy); border-color: var(--navy); }
 .answer-skip { color: var(--brown); background: var(--cream); }
 .answer-button:hover { border-color: var(--brown); }
-.up-arrow { font-size: 22px; }
 .exam-navigation { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px; }
 .quiet-note { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 9px; line-height: 1.6; }
 .quiet-note .icon { width: 11px; height: 11px; }
-.gesture-footnote { color: var(--muted); font-size: 8px; line-height: 1.8; text-align: center; margin-top: 3px; }
+
 .child-care { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 7px; }
 .child-care summary { font-size: 10px; color: var(--brown); padding: 8px 0; }
 .child-note { font-size: 12px; line-height: 1.8; color: var(--muted); padding: 12px; background: var(--cream); border-radius: 12px; margin-top: 7px; }
@@ -290,9 +284,9 @@ dialog > p:not(.eyebrow) { font-size: 13px; color: var(--muted); line-height: 1.
   .swipe-question { font-size: 26px; }
   .answer-actions { gap: 7px; }
   .answer-button { gap: 6px; padding-inline: 6px; }
-  .answer-button > span:not(.up-arrow) { font-size: 15px; }
-  .answer-button small { font-size: 8px; }
-  .gesture-footnote { font-size: 7px; }
+  .answer-button > span { font-size: 15px; }
+
+
   .summary-heading { flex-wrap: wrap; gap: 0; }
 }
 @media (display-mode: standalone) {
@@ -561,11 +555,10 @@ function examination() {
   const previous = session.answers.get(question.id);
   return `<section class="container page-section examination"><div class="exam-toolbar"><button class="icon-button" data-action="previous" aria-label="${question.position === 1 ? 'Preparação' : 'Pergunta anterior'}">${icon('back')}</button><span>Pergunta <strong>${question.position}</strong> de ${question.total}</span><button class="icon-button" data-prayer="espirito" aria-label="Fazer uma oração">${icon('sun')}</button><button class="icon-button" data-action="reset" aria-label="Encerrar e apagar">${icon('close')}</button></div><progress value="${question.position}" max="${question.total}" aria-label="Pergunta atual do exame">${question.position} de ${question.total}</progress>
     <div class="exam-theme"><p class="eyebrow">${session.index + 1}º MANDAMENTO · ${audience().label}</p><h1>${session.audience === 'children' ? item.short : item.title}</h1><button class="text-button" data-action="themes">Escolher tema ${icon('chevron')}</button></div>
-    <p class="gesture-help" id="gesture-help"><strong>← Sim</strong><span>↑ Pular</span><strong>Não →</strong></p>
-    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="gesture-help current-answer"><span class="swipe-feedback feedback-yes" aria-hidden="true">← SIM</span><span class="swipe-feedback feedback-no" aria-hidden="true">NÃO →</span><span class="swipe-feedback feedback-skip" aria-hidden="true">↑ PULAR</span><p class="swipe-question" id="current-question">${escape(question.text)}</p><p class="current-answer" id="current-answer">${previous ? `Resposta anterior: <strong>${answerLabels[previous]}</strong>. Você pode alterá-la.` : 'Deslize o cartão ou toque em uma opção.'}</p></div>
-    <div class="answer-actions" role="group" aria-label="Escolha sua resposta"><button class="answer-button answer-yes" data-answer="yes" aria-label="Sim">${icon('back')}<span>Sim<small>Esquerda</small></span></button><button class="answer-button answer-skip" data-answer="skip" aria-label="Pular pergunta"><span class="up-arrow" aria-hidden="true">↑</span><span>Pular<small>Para cima</small></span></button><button class="answer-button answer-no" data-answer="no" aria-label="Não"><span>Não<small>Direita</small></span>${icon('arrow')}</button></div>
+    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="current-answer"><p class="swipe-question" id="current-question">${escape(question.text)}</p><p class="current-answer" id="current-answer">${previous ? `Resposta anterior: <strong>${answerLabels[previous]}</strong>. Você pode alterá-la.` : 'Toque em uma opção para responder.'}</p></div>
+    <div class="answer-actions" role="group" aria-label="Escolha sua resposta"><button class="answer-button answer-yes" data-answer="yes" aria-label="Sim"><span>SIM</span></button><button class="answer-button answer-no" data-answer="no" aria-label="Não"><span>NÃO</span></button><button class="answer-button answer-skip" data-answer="skip" aria-label="Pular pergunta"><span>PULAR</span></button></div>
     <div class="exam-navigation"><span class="quiet-note">${icon('lock')} Só nesta sessão</span><a class="text-button" href="#resumo">Ver resumo ${icon('arrow')}</a></div>
-    ${session.audience === 'children' ? '<details class="child-care"><summary>Um cuidado importante com você</summary><p class="child-note">Se alguém machucou você ou fez você se sentir inseguro, isso não é sua culpa. Converse com um adulto de confiança que possa proteger você.</p></details>' : ''}<p class="gesture-footnote">Teclado: ← Sim · → Não · ↑ Pular. Role a página tocando fora do cartão.</p></section>`;
+    ${session.audience === 'children' ? '<details class="child-care"><summary>Um cuidado importante com você</summary><p class="child-note">Se alguém machucou você ou fez você se sentir inseguro, isso não é sua culpa. Converse com um adulto de confiança que possa proteger você.</p></details>' : ''}</section>`;
 }
 
 function summary() {
@@ -785,7 +778,7 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) render({ f
 window.addEventListener('hashchange', () => { for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close(); render(); });
 render({ focus: false });
 </script>
-  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="Recomeço" /><meta name="recomeco-version" content="da04805fdd0f8ab227a6" /></head>
+  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="Recomeço" /><meta name="recomeco-version" content="cbd2c9d72742c954f7ae" /></head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div id="app"><main class="container page-section"><p class="eyebrow">RECOMEÇO</p><div class="page-heading"><h1>Seu momento de reflexão.</h1><p>Se o aplicativo não iniciar, feche esta visualização e abra novamente o resultado atualizado.</p></div></main></div>
