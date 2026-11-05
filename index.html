@@ -197,11 +197,13 @@ progress::-moz-progress-bar { background: var(--gold); border-radius: 10px; }
 .swipe-card { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 23px; min-height: 245px; padding: 32px 23px; border: 1px solid var(--gold); border-radius: 22px; background: var(--cream); text-align: center; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; transition: transform .15s, border-color .15s; box-shadow: 0 5px 0 #C69A541A; }
 .swipe-card.is-dragging { cursor: grabbing; }
 .swipe-question { font: 500 29px/1.4 var(--subtitle); color: var(--navy); }
-.current-answer { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.question-explanation { width: 100%; padding-top: 17px; border-top: 1px solid var(--line); font: 400 13px/1.85 var(--body); text-align: left; color: var(--muted); }
+.answer-instruction { margin-top: 17px; color: var(--muted); font-size: 11px; line-height: 1.8; text-align: center; }
+.current-answer { margin-top: 12px; font-size: 10px; color: var(--muted); line-height: 1.7; text-align: center; }
 .swipe-card[data-swipe="yes"] { transform: translateX(-8px) rotate(-.5deg); border-color: var(--brown); }
 .swipe-card[data-swipe="no"] { transform: translateX(8px) rotate(.5deg); border-color: var(--brown); }
 .swipe-card[data-swipe="skip"] { transform: translateY(-8px); border-color: var(--brown); }
-.answer-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 18px; }
+.answer-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 11px; }
 .answer-button { display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 70px; padding: 11px 8px; border: 1px solid var(--gold); border-radius: 16px; background: var(--warm-white); color: var(--navy); }
 .answer-button > span { font: 600 17px/1.3 var(--title); }
 .answer-button .icon { width: 16px; height: 16px; }
@@ -312,6 +314,23 @@ const commandments = [
       youth: ['Tenho procurado conhecer Deus e conversar com Ele na oração?', 'Deixei que a aprovação dos outros ou as redes sociais ocupassem todo o espaço da minha vida?', 'Tive vergonha de viver a minha fé ou tratei com desprezo quem acredita em Deus?'],
       children: ['Tenho me lembrado de conversar com Deus e agradecer pelo seu amor?', 'Procurei aprender sobre Jesus na catequese e em casa?', 'Deixei de fazer o bem para agradar os amigos?'],
     },
+    explanations: {
+      "adults": [
+        "Reflita se deixou a oração de lado por indiferença, embora pudesse rezar. Distrações involuntárias ou uma rotina difícil não são, por si, falta de fé.",
+        "A falha pode estar em buscar dinheiro, prestígio ou poder a ponto de abandonar a fé e os deveres de amor. Trabalhar e buscar uma vida digna não são o problema.",
+        "Considere a busca de adivinhação ou de poder mágico para controlar a vida, em vez da confiança em Deus. Um símbolo religioso não deve ser tratado como amuleto."
+      ],
+      "youth": [
+        "Pense se você deixa Deus de lado por escolha própria, mesmo podendo dedicar algum tempo à oração. Ter perguntas sobre a fé não é o mesmo que rejeitá-la.",
+        "Observe se a busca por curtidas e aprovação levou você a descuidar da oração, das pessoas ou de suas responsabilidades. Usar redes sociais não é, por si, pecado.",
+        "Recorde se negou a própria fé para agradar alguém ou humilhou quem crê. Sentir timidez ou ter dificuldade para falar de Deus não equivale a desprezá-lo."
+      ],
+      "children": [
+        "Pense se você costuma se lembrar de Deus ou se o deixa de lado de propósito. Conversar com Ele pode ser um agradecimento simples, com suas próprias palavras.",
+        "Recorde se prestou atenção quando podia aprender sobre Jesus ou se atrapalhou de propósito. Não entender alguma coisa é uma oportunidade de perguntar.",
+        "Pense se participou de algo que sabia ser errado só para ser aceito, como excluir um colega. Você pode procurar um adulto de confiança para ajudar a escolher o bem."
+      ]
+    },
   },
   {
     id: 'nome', numeral: 'II', title: 'Não tomar seu santo nome em vão', short: 'Respeito pelo que é sagrado',
@@ -320,6 +339,23 @@ const commandments = [
       adults: ['Usei o nome de Deus, de Jesus ou dos santos de forma ofensiva ou desrespeitosa?', 'Fiz juramentos falsos ou usei a religião para justificar atitudes injustas?', 'Cumpri as promessas que fiz a Deus com liberdade e responsabilidade?'],
       youth: ['Usei o nome de Deus para xingar, zombar ou fazer piadas ofensivas?', 'Compartilhei conteúdos que desrespeitam a fé ou o que é sagrado?', 'Prometi algo em nome de Deus sem intenção de cumprir?'],
       children: ['Falei o nome de Deus ou de Jesus com carinho e respeito?', 'Fiz brincadeiras que desrespeitam a oração ou as coisas de Deus?', 'Usei o nome de Deus para dizer que uma mentira era verdade?'],
+    },
+    explanations: {
+      "adults": [
+        "Considere palavras usadas de propósito para insultar Deus, Jesus ou os santos. Uma expressão involuntária não é igual a uma ofensa escolhida conscientemente.",
+        "Jurar sabendo que é mentira ou usar o nome de Deus para encobrir uma injustiça são exemplos. A religião não torna correto aquilo que fere a verdade ou o próximo.",
+        "Recorde compromissos assumidos livremente e deixados de lado por descuido. Se fez uma promessa imprudente ou prejudicial, peça orientação ao sacerdote."
+      ],
+      "youth": [
+        "Pense em xingamentos ou piadas feitos de propósito para ofender Deus ou a fé. Uma palavra que escapou sem intenção precisa ser distinguida de uma ofensa deliberada.",
+        "Reflita se compartilhou algo para ridicularizar a fé ou incentivar o desprezo pelo sagrado. Fazer perguntas respeitosas ou discordar com respeito é diferente de ofender.",
+        "Observe se invocou Deus para dar credibilidade a algo que já sabia que não cumpriria. Promessas impensadas podem ser conversadas com um sacerdote."
+      ],
+      "children": [
+        "Recorde como falou de Deus e de Jesus. Usar seus nomes para xingar ou zombar de propósito é diferente de fazer uma pergunta sincera sobre a fé.",
+        "Pense se atrapalhou uma oração ou fez uma brincadeira para desrespeitar o que é sagrado. Uma distração sem querer não é a mesma coisa que zombar.",
+        "Dizer “juro por Deus” sabendo que está mentindo é um exemplo. O caminho do bem é contar a verdade, reconhecer o erro e procurar repará-lo."
+      ]
     },
   },
   {
@@ -330,6 +366,23 @@ const commandments = [
       youth: ['Deixei de participar da Missa quando eu realmente podia ir?', 'Procurei prestar atenção e participar da celebração?', 'Reservei algum tempo do domingo para a oração, a convivência e o bem ao próximo?'],
       children: ['Quando pude ir à Missa com minha família, participei com respeito?', 'Procurei ouvir a Palavra de Deus e aprender com ela?', 'No domingo, lembrei de Deus e procurei estar com quem cuida de mim?'],
     },
+    explanations: {
+      "adults": [
+        "Considere uma ausência escolhida sem motivo sério. Doença, cuidado indispensável de alguém e outras impossibilidades reais devem ser levados em conta.",
+        "Reflita se escolheu conversar, perturbar ou tratar a celebração com desprezo. Distrações involuntárias e dificuldades de concentração não equivalem a desrespeito deliberado.",
+        "Pense se ignorou de propósito a oração, o descanso e o cuidado com as pessoas. Trabalho necessário e responsabilidades de cuidado também devem ser considerados."
+      ],
+      "youth": [
+        "Recorde se podia ir à Missa, mas decidiu não ir sem motivo sério. Se você depende de transporte ou da decisão de responsáveis, considere o que estava ao seu alcance.",
+        "Observe se conversou ou atrapalhou a celebração de propósito. Perder a atenção sem querer é diferente de escolher desrespeitar aquele momento.",
+        "Pense se deixou todo o domingo para distrações, sem espaço para Deus e para as pessoas. Considere também compromissos necessários e suas possibilidades reais."
+      ],
+      "children": [
+        "Pense se procurou participar com respeito quando pôde ir. Se ninguém podia levar você, isso não foi uma escolha sua nem uma falta pela qual deva se culpar.",
+        "Recorde se tentou ouvir e aprender ou se atrapalhou de propósito. Se algo foi difícil de entender, você pode perguntar a um responsável ou catequista.",
+        "Pense se encontrou um tempinho para agradecer a Deus e conviver com quem cuida de você. Brincar e descansar também fazem parte de um bom domingo."
+      ]
+    },
   },
   {
     id: 'familia', numeral: 'IV', title: 'Honrar pai e mãe', short: 'Amor dentro de casa',
@@ -338,6 +391,23 @@ const commandments = [
       adults: ['Tratei meus pais, familiares e as pessoas sob meus cuidados com respeito e paciência?', 'Fui omisso nas responsabilidades com filhos, idosos ou pessoas que dependem de mim?', 'Abusei da minha autoridade ou deixei de escutar quem precisava de atenção?'],
       youth: ['Tratei meus pais ou responsáveis com respeito, mesmo quando discordamos?', 'Deixei de cumprir responsabilidades justas em casa ou nos estudos?', 'Procurei dialogar e ajudar minha família, em vez de agir com desprezo?'],
       children: ['Respeitei e escutei as pessoas que cuidam de mim quando me pedem algo bom?', 'Ajudei em casa nas tarefas que consigo fazer?', 'Fui grosseiro com meus familiares ou briguei sem procurar fazer as pazes?'],
+    },
+    explanations: {
+      "adults": [
+        "Recorde insultos, desprezo ou falta de cuidado que poderia ter evitado. Discordar com respeito e estabelecer limites para se proteger de uma violência não são desonra.",
+        "Observe se deixou de oferecer cuidado necessário quando tinha condições de fazê-lo. Limites financeiros, de saúde e de capacidade precisam ser considerados.",
+        "Impor medo, humilhar ou usar uma posição de autoridade para controlar alguém injustamente são exemplos. Autoridade deve servir ao cuidado e à dignidade da pessoa."
+      ],
+      "youth": [
+        "Pense em insultos, humilhações ou atitudes de desprezo em casa. Discordar com respeito não é faltar com o dever de honrar; você não deve obedecer a uma ordem injusta.",
+        "Recorde tarefas e estudos que deixou de lado por descuido, embora pudesse cumpri-los. Dificuldades de aprendizagem ou falta de condições não são simples má vontade.",
+        "Observe se recusou ajuda possível, ignorou uma conversa ou tratou familiares com desprezo. Dialogar também permite expressar seus limites de forma respeitosa."
+      ],
+      "children": [
+        "Pense se desobedeceu de propósito a um pedido justo ou tratou mal quem cuida de você. Uma ordem para machucar, mentir ou aceitar algo perigoso não deve ser obedecida.",
+        "Recorde pequenas tarefas que podia fazer, mas deixou para os outros por descuido. A ajuda deve ser adequada à sua idade e ao que você consegue realizar.",
+        "Pense se xingou, provocou brigas ou se recusou a pedir desculpas depois de machucar alguém. Fazer as pazes não significa aceitar que alguém maltrate você."
+      ]
     },
   },
   {
@@ -348,6 +418,23 @@ const commandments = [
       youth: ['Pratiquei ou incentivei bullying, ameaças, racismo ou humilhações, inclusive na internet?', 'Alimentei raiva ou vingança em vez de procurar uma forma segura de resolver conflitos?', 'Coloquei minha saúde ou a segurança de alguém em risco de propósito?'],
       children: ['Machuquei alguém de propósito com palavras ou atitudes?', 'Zombei de um colega, excluí alguém ou participei de bullying?', 'Cuidei de mim, das outras pessoas, dos animais e da natureza?'],
     },
+    explanations: {
+      "adults": [
+        "Agressões, ameaças, humilhações e discriminação são exemplos de ofensa à dignidade. Pense nas próprias escolhas; uma violência sofrida não é culpa da vítima.",
+        "Reflita se alimentou de propósito a vontade de ferir ou se vingar. Sentir raiva ou precisar manter distância de alguém perigoso não é o mesmo que escolher o ódio.",
+        "Considere riscos assumidos de propósito, como dirigir alcoolizado, ou descuidos evitáveis. Estar doente ou precisar de ajuda não é uma falta moral."
+      ],
+      "youth": [
+        "Insultar, ameaçar, excluir para humilhar ou compartilhar uma agressão para divertir os outros são exemplos. Participar pela internet também pode machucar de verdade.",
+        "Pense se planejou humilhar ou ferir alguém por vingança. Sentir raiva não é o mesmo que agir mal; buscar ajuda para resolver o conflito é um caminho de cuidado.",
+        "Brincadeiras perigosas ou incentivar alguém a se arriscar podem ferir a vida. Se você está sofrendo ou teve sua segurança ameaçada, procure um adulto de confiança."
+      ],
+      "children": [
+        "Pense se bateu, ameaçou ou usou palavras para machucar alguém de propósito. Um acidente sem intenção é diferente de escolher ferir.",
+        "Apelidos que humilham, risadas para envergonhar e deixar alguém de fora para machucar são exemplos. Você pode pedir ajuda para parar uma situação de bullying.",
+        "Recorde se maltratou alguém, um animal ou a natureza de propósito. Considere o que você já sabe fazer e como pode reparar um cuidado que deixou de ter."
+      ]
+    },
   },
   {
     id: 'castidade', numeral: 'VI', title: 'Não pecar contra a castidade', short: 'Amar com respeito',
@@ -356,6 +443,23 @@ const commandments = [
       adults: ['Procurei viver a sexualidade de acordo com a castidade própria do meu estado de vida?', 'Tratei alguém como objeto de prazer ou consumi pornografia?', 'Desrespeitei a fidelidade no casamento ou os limites e a dignidade de outra pessoa?'],
       youth: ['Respeitei meu corpo, minha intimidade e a dignidade de outras pessoas?', 'Procurei conteúdos que transformam pessoas em objetos ou compartilhei imagens íntimas?', 'Pressionei alguém ou desrespeitei seus limites em um relacionamento?'],
       children: ['Tratei meu corpo e o corpo das outras pessoas com respeito?', 'Respeitei a privacidade dos outros e os seus limites?', 'Fiz brincadeiras ou comentários que deixaram outra pessoa constrangida com o próprio corpo?'],
+    },
+    explanations: {
+      "adults": [
+        "Reflita sobre escolhas como relações sexuais fora do matrimônio ou infidelidade. A castidade envolve respeito, fidelidade e domínio de si, conforme seu estado de vida.",
+        "Considere a procura voluntária de pornografia ou o uso de alguém apenas para satisfação pessoal. Algo visto sem querer é diferente de escolher procurar ou consumir.",
+        "Violar compromissos conjugais, manipular ou pressionar alguém são exemplos. Algo sofrido sem seu consentimento não é sua culpa."
+      ],
+      "youth": [
+        "Pense em atitudes que desrespeitam sua intimidade ou a de outra pessoa. As mudanças do corpo e os sentimentos espontâneos não são, por si, pecado.",
+        "Procurar pornografia ou repassar imagens íntimas desrespeita a dignidade das pessoas. Receber algo sem pedir não é o mesmo que escolher procurar ou compartilhar.",
+        "Insistir depois de um não, manipular ou usar ameaças para obter afeto são exemplos. Se alguém fez isso com você, a responsabilidade não é sua."
+      ],
+      "children": [
+        "Cuidar do corpo é tratá-lo com respeito, sem machucar ou humilhar ninguém. Se alguém desrespeitou você, procure um adulto de confiança: isso não é sua culpa.",
+        "Invadir a privacidade de alguém ou insistir em tocar depois que a pessoa disse não são exemplos de desrespeito. Você também pode pedir ajuda para proteger seus limites.",
+        "Apelidos sobre o corpo, piadas e brincadeiras que envergonham alguém podem machucar. Pense se fez isso de propósito e como pode reparar."
+      ]
     },
   },
   {
@@ -366,6 +470,23 @@ const commandments = [
       youth: ['Peguei coisas sem permissão ou deixei de devolver algo emprestado?', 'Fui desonesto em provas, trabalhos, jogos ou compras?', 'Cuidei dos bens de outras pessoas e procurei partilhar com quem precisa?'],
       children: ['Peguei algo que não era meu sem pedir?', 'Devolvi o que peguei emprestado e cuidei das coisas dos outros?', 'Procurei dividir e ajudar quem tem menos do que eu?'],
     },
+    explanations: {
+      "adults": [
+        "Considere apropriação de bens, fraude, retenção injusta ou desonestidade no trabalho. Quando possível, reparar inclui devolver ou restituir o que foi tirado.",
+        "Reflita se reteve um pagamento justo ou deixou uma dívida sem pagar apesar de poder fazê-lo. Incapacidade real de pagar não é o mesmo que recusar uma obrigação.",
+        "Pense no desperdício deliberado e na recusa de ajuda possível a alguém necessitado. Considere seus recursos, responsabilidades e as formas concretas de partilhar."
+      ],
+      "youth": [
+        "Pegar dinheiro ou objetos sem permissão, guardar algo encontrado sem procurar o dono ou não devolver um empréstimo são exemplos. Procure devolver ou reparar.",
+        "Colar, apresentar trabalho de outra pessoa como seu ou enganar para obter vantagem são exemplos. Pedir ajuda e colaborar quando isso é permitido são atitudes diferentes.",
+        "Reflita se danificou algo de propósito, desperdiçou recursos ou negou uma ajuda que podia oferecer. Partilhar deve respeitar também os bens e os direitos dos outros."
+      ],
+      "children": [
+        "Pegar um brinquedo, dinheiro ou outro objeto sabendo que não é seu e sem permissão é um exemplo. Se aconteceu, procure devolver e pedir desculpas.",
+        "Pense se estragou algo por descuido que podia evitar ou deixou de devolver o que pegou emprestado. Um acidente sem intenção deve ser distinguido de uma escolha ruim.",
+        "Recorde uma ajuda ou partilha que estava ao seu alcance e você recusou por egoísmo. Ser generoso não significa dar algo que pertence a outra pessoa sem pedir."
+      ]
+    },
   },
   {
     id: 'verdade', numeral: 'VIII', title: 'Não levantar falso testemunho', short: 'Palavras que constroem',
@@ -374,6 +495,23 @@ const commandments = [
       adults: ['Menti, caluniei ou espalhei comentários que feriram a reputação de alguém?', 'Compartilhei acusações ou notícias sem verificar se eram verdadeiras?', 'Revelei confidências ou usei a verdade para humilhar, sem necessidade ou caridade?'],
       youth: ['Menti para evitar responsabilidades ou enganar alguém?', 'Espalhei fofocas, boatos, prints ou acusações sem verificar?', 'Quebrei a confiança de alguém ao revelar um segredo ou expor sua intimidade?'],
       children: ['Contei mentiras ou culpei outra pessoa por algo que fiz?', 'Espalhei fofocas ou falei mal de um colega?', 'Tive coragem de dizer a verdade e pedir desculpas quando errei?'],
+    },
+    explanations: {
+      "adults": [
+        "Inventar uma acusação, enganar de propósito ou espalhar defeitos alheios sem razão justa são exemplos. Repare, quando possível, o dano causado à verdade e à reputação.",
+        "Reflita se divulgou informações duvidosas sem o cuidado que podia ter. Saber que algo é falso e ainda assim compartilhar é diferente de um engano de boa-fé.",
+        "Revelar confidências para expor ou humilhar pode ferir a caridade. Comunicar uma injustiça ou pedir ajuda para proteger alguém, de modo responsável, é diferente de fofoca."
+      ],
+      "youth": [
+        "Pense se inventou uma história ou escondeu a verdade para enganar alguém e escapar de uma responsabilidade. Você pode reconhecer o erro e procurar corrigir o dano.",
+        "Repassar boatos, acusações e prints para expor alguém pode ferir a verdade e sua reputação. Antes de compartilhar, considere a veracidade, a necessidade e o respeito.",
+        "Contar um segredo para humilhar ou se divertir às custas de alguém quebra a confiança. Pedir ajuda diante de violência ou perigo não é uma traição."
+      ],
+      "children": [
+        "Dizer algo que você sabe ser falso ou culpar um colega para escapar de uma consequência são exemplos. Não lembrar bem de um fato não é o mesmo que mentir.",
+        "Pense se espalhou uma história para fazer os outros rirem de alguém ou prejudicá-lo. Contar a um adulto de confiança que alguém está em perigo não é fofoca.",
+        "Recorde se escondeu um erro para enganar ou recusou um pedido de desculpas que podia fazer. Pedir ajuda para contar a verdade também é um passo de coragem."
+      ]
     },
   },
   {
@@ -384,6 +522,23 @@ const commandments = [
       youth: ['Alimentei de propósito pensamentos que desrespeitam a dignidade de alguém?', 'Tentei interferir em um relacionamento por egoísmo ou ciúme?', 'Procurei cultivar amizades e afetos com sinceridade e respeito?'],
       children: ['Procurei ter um coração bondoso e respeitar as pessoas?', 'Quis atrapalhar uma amizade porque estava com ciúme?', 'Tratei meus amigos com carinho, sem querer mandar neles ou impedir outras amizades?'],
     },
+    explanations: {
+      "adults": [
+        "Considere o desejo de infidelidade que você escolhe alimentar. Uma atração espontânea ou um pensamento que aparece sem querer não equivale a consentir com ele.",
+        "Pense em flertes ou relações ocultadas que você escolheu cultivar em prejuízo da fidelidade conjugal. Ter amizades respeitosas não é o mesmo que buscar uma traição.",
+        "Reflita se escolheu alimentar fantasias ou atitudes que reduzem alguém a um objeto. Reconhecer a beleza de uma pessoa não é o mesmo que desrespeitá-la."
+      ],
+      "youth": [
+        "Pense em pensamentos que você escolheu alimentar para desrespeitar ou usar alguém. Um pensamento indesejado ou um sentimento espontâneo não é uma escolha culpável.",
+        "Espalhar mentiras ou manipular pessoas para destruir um vínculo por ciúme são exemplos. Sentir ciúme, por si só, não é o mesmo que escolher agir mal.",
+        "Observe se houve mentira, manipulação ou interesse em usar alguém em uma amizade ou namoro. Cultivar afeto com sinceridade inclui respeitar a liberdade do outro."
+      ],
+      "children": [
+        "Pense se guardou de propósito a vontade de machucar ou humilhar alguém. Um pensamento que apareceu sem querer não é igual a uma decisão de fazer o mal.",
+        "Tentar separar amigos com mentiras ou provocações por ciúme pode machucar. Sentir ciúme é diferente de escolher prejudicar uma amizade.",
+        "Pense se exigiu ser o único amigo de alguém ou fez chantagem para conseguir atenção. Bons amigos respeitam a liberdade e as outras amizades de cada um."
+      ]
+    },
   },
   {
     id: 'gratidao', numeral: 'X', title: 'Não cobiçar as coisas alheias', short: 'Um coração agradecido',
@@ -392,6 +547,23 @@ const commandments = [
       adults: ['Alimentei inveja do que outras pessoas possuem ou das suas conquistas?', 'Deixei a ganância ou a comparação guiar minhas escolhas?', 'Procurei agradecer pelo que tenho e alegrar-me com o bem dos outros?'],
       youth: ['Deixei a comparação com outras pessoas, inclusive nas redes, se transformar em inveja?', 'Desejei que alguém fracassasse para eu me sentir melhor?', 'Procurei valorizar o que tenho e celebrar as conquistas dos meus amigos?'],
       children: ['Fiquei desejando que outra pessoa perdesse algo que eu queria ter?', 'Fui egoísta ou briguei porque queria ter tudo para mim?', 'Agradeci pelo que tenho e fiquei feliz quando algo bom aconteceu com um amigo?'],
+    },
+    explanations: {
+      "adults": [
+        "A inveja se manifesta quando você alimenta tristeza pelo bem do outro ou deseja que ele o perca. Querer melhorar a própria vida por meios justos é diferente disso.",
+        "Considere escolhas guiadas pelo desejo de ter sempre mais, mesmo prejudicando alguém. Perceber uma comparação ou uma vontade passageira não é o mesmo que alimentá-la.",
+        "Pense se cultivou ingratidão ou se recusou a reconhecer o bem de alguém por inveja. Não sentir alegria imediatamente é diferente de desejar deliberadamente o mal."
+      ],
+      "youth": [
+        "Reflita se a comparação levou você a alimentar inveja, desprezar alguém ou querer que perdesse algo bom. Admirar uma conquista e buscar crescer não são a mesma coisa.",
+        "Torcer de propósito para que alguém fracasse ou tentar atrapalhá-lo por inveja são exemplos. Uma competição justa permite desejar o próprio bem sem querer o mal do outro.",
+        "Pense se desmereceu uma conquista ou zombou de um amigo por inveja. Você pode escolher uma atitude de respeito, mesmo quando ainda está aprendendo a lidar com o que sente."
+      ],
+      "children": [
+        "Pense se quis de propósito que um colega perdesse um brinquedo, uma amizade ou algo bom. Querer um brinquedo parecido não é a mesma coisa que desejar o mal de alguém.",
+        "Brigar para ficar com tudo ou impedir os outros de brincar por egoísmo são exemplos. Você pode aprender a dividir e a respeitar o que pertence a cada um.",
+        "Recorde se estragou a alegria de alguém porque queria ter o que ele ganhou. Sentir uma pontinha de inveja não é igual a escolher machucar; procure um gesto de bondade."
+      ]
     },
   },
 ];
@@ -434,6 +606,7 @@ function currentQuestion(session) {
   return {
     id: questionId(theme, session.questionIndex),
     text: theme.questions[session.audience][session.questionIndex],
+    explanation: theme.explanations[session.audience][session.questionIndex],
     position: commandments.slice(0, session.index).reduce((total, item) => total + item.questions[session.audience].length, 0) + session.questionIndex + 1,
     total: commandments.reduce((total, item) => total + item.questions[session.audience].length, 0),
   };
@@ -555,7 +728,8 @@ function examination() {
   const previous = session.answers.get(question.id);
   return `<section class="container page-section examination"><div class="exam-toolbar"><button class="icon-button" data-action="previous" aria-label="${question.position === 1 ? 'Preparação' : 'Pergunta anterior'}">${icon('back')}</button><span>Pergunta <strong>${question.position}</strong> de ${question.total}</span><button class="icon-button" data-prayer="espirito" aria-label="Fazer uma oração">${icon('sun')}</button><button class="icon-button" data-action="reset" aria-label="Encerrar e apagar">${icon('close')}</button></div><progress value="${question.position}" max="${question.total}" aria-label="Pergunta atual do exame">${question.position} de ${question.total}</progress>
     <div class="exam-theme"><p class="eyebrow">${session.index + 1}º MANDAMENTO · ${audience().label}</p><h1>${session.audience === 'children' ? item.short : item.title}</h1><button class="text-button" data-action="themes">Escolher tema ${icon('chevron')}</button></div>
-    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="current-answer"><p class="swipe-question" id="current-question">${escape(question.text)}</p><p class="current-answer" id="current-answer">${previous ? `Resposta anterior: <strong>${answerLabels[previous]}</strong>. Você pode alterá-la.` : 'Toque em uma opção para responder.'}</p></div>
+    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="question-explanation answer-instruction${previous ? ' current-answer' : ''}"><p class="swipe-question" id="current-question">${escape(question.text)}</p><p class="question-explanation" id="question-explanation">${escape(question.explanation)}</p></div>
+    ${previous ? `<p class="current-answer" id="current-answer">Resposta anterior: <strong>${answerLabels[previous]}</strong>. Você pode alterá-la.</p>` : ''}<p class="answer-instruction" id="answer-instruction">Toque em uma opção para responder.</p>
     <div class="answer-actions" role="group" aria-label="Escolha sua resposta"><button class="answer-button answer-yes" data-answer="yes" aria-label="Sim"><span>SIM</span></button><button class="answer-button answer-no" data-answer="no" aria-label="Não"><span>NÃO</span></button><button class="answer-button answer-skip" data-answer="skip" aria-label="Pular pergunta"><span>PULAR</span></button></div>
     <div class="exam-navigation"><span class="quiet-note">${icon('lock')} Só nesta sessão</span><a class="text-button" href="#resumo">Ver resumo ${icon('arrow')}</a></div>
     ${session.audience === 'children' ? '<details class="child-care"><summary>Um cuidado importante com você</summary><p class="child-note">Se alguém machucou você ou fez você se sentir inseguro, isso não é sua culpa. Converse com um adulto de confiança que possa proteger você.</p></details>' : ''}</section>`;
@@ -778,7 +952,7 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) render({ f
 window.addEventListener('hashchange', () => { for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close(); render(); });
 render({ focus: false });
 </script>
-  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="Recomeço" /><meta name="recomeco-version" content="cbd2c9d72742c954f7ae" /></head>
+  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="Recomeço" /><meta name="recomeco-version" content="af21ad94561e88e48dba" /></head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div id="app"><main class="container page-section"><p class="eyebrow">RECOMEÇO</p><div class="page-heading"><h1>Seu momento de reflexão.</h1><p>Se o aplicativo não iniciar, feche esta visualização e abra novamente o resultado atualizado.</p></div></main></div>
