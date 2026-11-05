@@ -192,15 +192,19 @@ progress { display: block; width: 100%; height: 4px; border: 0; border-radius: 1
 progress::-webkit-progress-bar { background: var(--cream); border-radius: 10px; }
 progress::-webkit-progress-value { background: var(--gold); border-radius: 10px; }
 progress::-moz-progress-bar { background: var(--gold); border-radius: 10px; }
-.exam-theme { text-align: center; margin-bottom: 8px; }
+.exam-theme { width: 100%; text-align: center; }
 .exam-theme .eyebrow { font-size: 8px; letter-spacing: 1.3px; }
 .exam-theme h1 { font-size: 19px; line-height: 1.4; margin-top: 7px; }
 .exam-theme .text-button { min-height: 35px; font-size: 9px; padding-block: 4px; color: var(--brown); }
 .exam-theme .text-button .icon { width: 12px; height: 12px; }
-.swipe-card { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 23px; min-height: 245px; padding: 32px 23px; border: 1px solid var(--gold); border-radius: 22px; background: var(--cream); text-align: center; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; transition: transform .15s, border-color .15s; box-shadow: 0 5px 0 #C69A541A; }
+.exam-theme progress { margin: 14px 0 2px; background: var(--warm-white); }
+.exam-theme progress::-webkit-progress-bar { background: var(--warm-white); }
+.swipe-card { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 22px; min-height: 245px; margin-top: 10px; padding: 24px 23px; border: 1px solid var(--gold); border-radius: 22px; background: var(--cream); text-align: center; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; transition: transform .15s, border-color .15s; box-shadow: 0 5px 0 #C69A541A; }
 .swipe-card.is-dragging { cursor: grabbing; }
-.swipe-question { font: 500 29px/1.4 var(--subtitle); color: var(--navy); }
-.question-explanation { width: 100%; padding-top: 17px; border-top: 1px solid var(--line); font: 400 13px/1.85 var(--body); text-align: left; color: var(--muted); }
+.examen-pergunta { width: 100%; font: 500 29px/1.4 var(--subtitle); color: var(--navy); text-align: center; overflow-wrap: break-word; touch-action: none; }
+.question-detail { width: 100%; min-width: 0; padding-top: 17px; border-top: 1px solid var(--line); }
+.question-detail h2 { margin-bottom: 9px; font: 600 10px/1.7 var(--title); letter-spacing: .8px; color: var(--brown); text-align: left; }
+.examen-explicacao, .examen-cic { font: 400 13px/1.85 var(--body); text-align: justify; text-align-last: left; hyphens: auto; overflow-wrap: break-word; color: var(--muted); }
 .answer-instruction { margin-top: 17px; color: var(--muted); font-size: 11px; line-height: 1.8; text-align: center; }
 .current-answer { margin-top: 12px; font-size: 10px; color: var(--muted); line-height: 1.7; text-align: center; }
 .swipe-card[data-swipe="yes"] { transform: translateX(-8px) rotate(-.5deg); border-color: var(--brown); }
@@ -309,275 +313,910 @@ dialog > p:not(.eyebrow) { font-size: 13px; color: var(--muted); line-height: 1.
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 </style>
-    <script type="module">const audiences = [
+    <script type="module">const questionnaire = {
+  "schemaVersion": "1.1",
+  "produto": "EXAMEN — Assistente de Exame de Consciência",
+  "instituicao": "Paróquia Verbo Divino",
+  "faixasEtarias": {
+    "criancas": "7 a 12 anos",
+    "jovens": "13 a 17 anos",
+    "adultos": "18 anos ou mais"
+  },
+  "perguntas": [
+    {
+      "id": "A01",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho deixado Deus em segundo plano na minha vida, negligenciando voluntariamente a oração, o cultivo da fé e o meu relacionamento com Ele?",
+      "explicacao": "Examina a indiferença religiosa e a negligência deliberada da vida espiritual. Convida a refletir se o trabalho, o dinheiro, os prazeres ou outros interesses passaram a ocupar o lugar que pertence a Deus. Não se confunde com distrações involuntárias ou dificuldades passageiras na oração.",
+      "fundamentacaoCic": "CIC §§ 2095–2098, 2113, 2697–2699."
+    },
+    {
+      "id": "A02",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho rejeitado conscientemente verdades da fé católica ou deixado de procurar compreender os ensinamentos da Igreja por orgulho, comodismo ou indiferença?",
+      "explicacao": "Busca identificar a recusa deliberada da fé e a resistência consciente à formação religiosa. Ter dúvidas sinceras, buscar esclarecimentos e enfrentar dificuldades para compreender um ensinamento não constitui, por si só, pecado.",
+      "fundamentacaoCic": "CIC §§ 2087–2089, 2104–2105."
+    },
+    {
+      "id": "A03",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho recorrido a horóscopos, cartomancia, adivinhações, magia, invocação de espíritos ou outras práticas que procuram conhecer ou controlar o futuro por meios ocultos?",
+      "explicacao": "Examina a participação voluntária em práticas supersticiosas ou de adivinhação, contrárias à confiança na Providência Divina. Não se refere ao simples contato com representações fictícias dessas práticas em livros ou filmes.",
+      "fundamentacaoCic": "CIC §§ 2110–2117."
+    },
+    {
+      "id": "A04",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 2,
+      "mandamentoTitulo": "Não tomar seu Santo Nome em vão",
+      "pergunta": "Tenho utilizado o nome de Deus, de Jesus Cristo, da Virgem Maria ou dos santos de maneira ofensiva, desrespeitosa ou para justificar comportamentos contrários à fé?",
+      "explicacao": "Examina a blasfêmia, o uso irreverente dos nomes sagrados e a instrumentalização da religião para justificar injustiças, ofensas ou comportamentos moralmente reprováveis.",
+      "fundamentacaoCic": "CIC §§ 2142–2149."
+    },
+    {
+      "id": "A05",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 2,
+      "mandamentoTitulo": "Não tomar seu Santo Nome em vão",
+      "pergunta": "Tenho jurado falsamente em nome de Deus ou feito promessas religiosas que nunca tive a intenção de cumprir?",
+      "explicacao": "Busca identificar o uso da autoridade divina para sustentar mentiras e compromissos assumidos sem sinceridade. A impossibilidade involuntária de cumprir uma promessa deve ser distinguida de sua violação deliberada.",
+      "fundamentacaoCic": "CIC §§ 2147, 2150–2155."
+    },
+    {
+      "id": "A06",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho faltado voluntariamente à Santa Missa aos domingos ou dias de preceito, mesmo tendo condições de participar e não existindo motivo sério que justificasse minha ausência?",
+      "explicacao": "Examina o descumprimento consciente do preceito dominical. Doença, impossibilidade real e outras razões graves podem justificar a ausência, conforme o ensinamento da Igreja.",
+      "fundamentacaoCic": "CIC §§ 2180–2183."
+    },
+    {
+      "id": "A07",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho recebido a Sagrada Comunhão consciente de pecado mortal ainda não confessado, sem observar as condições excepcionais previstas pela Igreja?",
+      "explicacao": "Examina o respeito à Santíssima Eucaristia e a necessidade de preparação espiritual para recebê-la dignamente. Quem tem consciência de pecado mortal deve, ordinariamente, receber antes a absolvição sacramental.",
+      "fundamentacaoCic": "CIC §§ 1385, 1415, 1457."
+    },
+    {
+      "id": "A08",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho permitido que o trabalho, o consumismo, as diversões ou outras ocupações desnecessárias me impeçam de santificar o domingo e dedicar tempo a Deus, à família e ao descanso?",
+      "explicacao": "Examina a organização da vida dominical, considerando os deveres religiosos, o repouso e a convivência familiar. Não condena atividades profissionais verdadeiramente necessárias ou obras de caridade.",
+      "fundamentacaoCic": "CIC §§ 2184–2188."
+    },
+    {
+      "id": "A09",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho tratado meus pais ou familiares idosos com desrespeito, desprezo ou indiferença, deixando de lhes prestar a assistência que razoavelmente posso oferecer?",
+      "explicacao": "Examina os deveres de respeito, gratidão e assistência familiar, especialmente diante da velhice, da enfermidade e da vulnerabilidade. Esses deveres não exigem aceitar abusos ou colocar a própria segurança em risco.",
+      "fundamentacaoCic": "CIC §§ 2214–2218."
+    },
+    {
+      "id": "A10",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho negligenciado meus deveres de amor, respeito, diálogo, fidelidade e cuidado para com meu cônjuge ou outros familiares sob minha responsabilidade?",
+      "explicacao": "Busca identificar atitudes egoístas, abandono afetivo deliberado, humilhações e negligência das responsabilidades familiares. Considera também a necessidade de respeito mútuo e de atenção às necessidades legítimas de cada membro da família.",
+      "fundamentacaoCic": "CIC §§ 2201–2206, 2219, 2364–2365."
+    },
+    {
+      "id": "A11",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho negligenciado a educação moral e religiosa dos meus filhos, deixando de lhes oferecer bom exemplo, orientação, presença e acompanhamento adequados?",
+      "explicacao": "Examina o dever dos pais de educar integralmente os filhos, inclusive na fé, e de promover um ambiente familiar de amor e disciplina justa. Inclui a atenção responsável ao conteúdo que os filhos acessam na internet.",
+      "fundamentacaoCic": "CIC §§ 2221–2231."
+    },
+    {
+      "id": "A12",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho abusado da autoridade que exerço na família, no trabalho ou na sociedade, agindo com arrogância, injustiça ou desrespeito à dignidade das pessoas?",
+      "explicacao": "Examina o exercício legítimo da autoridade e suas responsabilidades. Abrange humilhações, tratamento degradante, favorecimentos injustos e imposição arbitrária de ordens.",
+      "fundamentacaoCic": "CIC §§ 2234–2243, 2285–2287."
+    },
+    {
+      "id": "A13",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho alimentado voluntariamente sentimentos de ódio, vingança ou desejo de causar sofrimento a alguém, recusando-me a buscar o perdão e a reconciliação quando possível?",
+      "explicacao": "Examina a permanência deliberada no rancor e o desejo de fazer mal. Sentir raiva ou ter dificuldade emocional para perdoar não equivale, por si só, a consentir no ódio. Perdoar também não exige manter contato com quem representa perigo.",
+      "fundamentacaoCic": "CIC §§ 2302–2303, 2840–2845."
+    },
+    {
+      "id": "A14",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho causado intencionalmente sofrimento físico ou psicológico a outras pessoas por meio de agressões, ameaças, humilhações ou comportamentos violentos?",
+      "explicacao": "Busca identificar condutas que atentam contra a integridade e a dignidade do próximo, inclusive violência doméstica, intimidação e abuso de poder.",
+      "fundamentacaoCic": "CIC §§ 2268–2269, 2297–2298, 2302."
+    },
+    {
+      "id": "A15",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho provocado, aconselhado, facilitado intencionalmente ou cooperado diretamente com a prática do aborto ou da eutanásia?",
+      "explicacao": "Examina a responsabilidade moral em ações diretamente contrárias à proteção da vida humana. A análise de situações concretas de cooperação exige considerar a natureza do ato e a participação efetiva da pessoa. Cuidados paliativos proporcionais e recusa de tratamentos desproporcionais não equivalem, por si, à eutanásia.",
+      "fundamentacaoCic": "CIC §§ 2270–2279, 1868."
+    },
+    {
+      "id": "A16",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho colocado irresponsavelmente em risco a minha vida, saúde ou a segurança de outras pessoas mediante abuso de álcool, uso indevido de drogas, direção perigosa ou outros comportamentos gravemente imprudentes?",
+      "explicacao": "Examina o dever de cuidar razoavelmente da saúde e da segurança. Situações de dependência, doença ou outros fatores que diminuam a liberdade devem ser consideradas na avaliação da responsabilidade pessoal.",
+      "fundamentacaoCic": "CIC §§ 2288–2291."
+    },
+    {
+      "id": "A17",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho praticado voluntariamente relações sexuais fora do Matrimônio ou sido infiel ao compromisso de fidelidade conjugal?",
+      "explicacao": "Examina comportamentos sexuais contrários à castidade segundo o estado de vida e à fidelidade matrimonial. A doutrina católica reserva a união sexual ao Matrimônio e considera o adultério uma violação grave da fidelidade conjugal.",
+      "fundamentacaoCic": "CIC §§ 2348–2350, 2353, 2380–2381."
+    },
+    {
+      "id": "A18",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho procurado voluntariamente pornografia ou praticado atos sexuais solitários em busca de prazer, contrariando a virtude da castidade?",
+      "explicacao": "Examina a busca deliberada de pornografia e de prazer sexual fora da ordem moral ensinada pela Igreja. A exposição involuntária não equivale à procura consentida; imaturidade afetiva, hábitos adquiridos e fatores psicológicos podem diminuir a responsabilidade subjetiva.",
+      "fundamentacaoCic": "CIC §§ 2337–2339, 2351–2354."
+    },
+    {
+      "id": "A19",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho vivido a sexualidade conjugal de maneira egoísta, desrespeitando a dignidade, a liberdade ou a integridade do meu cônjuge, ou rejeitando deliberadamente a abertura responsável à vida?",
+      "explicacao": "Examina o amor conjugal como doação mútua, fiel e respeitosa. Abrange a instrumentalização sexual do cônjuge, a coerção e o desrespeito à dignidade do Matrimônio. A paternidade responsável não se confunde com a obrigação de buscar uma nova gravidez em qualquer circunstância.",
+      "fundamentacaoCic": "CIC §§ 2360–2370, 2356."
+    },
+    {
+      "id": "A20",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho me apropriado indevidamente de dinheiro, objetos, recursos ou bens pertencentes a outras pessoas, empresas ou instituições?",
+      "explicacao": "Examina o furto, a apropriação indevida e o uso desonesto de bens de terceiros, inclusive no ambiente profissional. Considera também as formas injustas de retenção de patrimônio.",
+      "fundamentacaoCic": "CIC §§ 2408–2409."
+    },
+    {
+      "id": "A21",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho agido com desonestidade em minhas atividades profissionais, comerciais ou financeiras, prejudicando outras pessoas mediante fraude, corrupção, remuneração injusta ou descumprimento deliberado de obrigações?",
+      "explicacao": "Examina a justiça nas relações econômicas, incluindo salários, contratos, dívidas, tributos legitimamente devidos e responsabilidades profissionais. Busca identificar vantagens obtidas mediante prejuízo injusto a terceiros.",
+      "fundamentacaoCic": "CIC §§ 2409–2410, 2426–2436, 2240."
+    },
+    {
+      "id": "A22",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho deixado de devolver bens, reparar prejuízos ou restituir valores obtidos injustamente, mesmo tendo condições de fazê-lo?",
+      "explicacao": "Examina o dever de reparação das injustiças patrimoniais. O arrependimento sincero deve ser acompanhado, na medida do possível, da restituição ou reparação do dano causado.",
+      "fundamentacaoCic": "CIC §§ 2411–2412, 2454."
+    },
+    {
+      "id": "A23",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho mentido deliberadamente para enganar, obter vantagens, esconder injustiças ou prejudicar outras pessoas?",
+      "explicacao": "Examina a mentira intencional e sua utilização para manipular situações ou pessoas. A gravidade depende, entre outros fatores, da intenção e das consequências da mentira.",
+      "fundamentacaoCic": "CIC §§ 2482–2486."
+    },
+    {
+      "id": "A24",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho participado de fofocas, calúnias ou difamações, revelando faltas alheias sem motivo justo ou atribuindo defeitos a pessoas sem provas suficientes?",
+      "explicacao": "Examina a proteção da honra e da reputação do próximo. Distingue calúnia, maledicência e juízo temerário, considerando também conversas em grupos e redes sociais.",
+      "fundamentacaoCic": "CIC §§ 2477–2479."
+    },
+    {
+      "id": "A25",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho prestado falso testemunho, manipulado informações importantes ou divulgado conteúdos enganosos capazes de causar injustiças a outras pessoas?",
+      "explicacao": "Examina a responsabilidade de testemunhar a verdade, especialmente quando uma declaração pode afetar direitos, reputações ou decisões importantes. Inclui a divulgação deliberada de desinformação.",
+      "fundamentacaoCic": "CIC §§ 2475–2476, 2493–2499."
+    },
+    {
+      "id": "A26",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 9,
+      "mandamentoTitulo": "Guardar castidade nos pensamentos e desejos",
+      "pergunta": "Tenho alimentado voluntariamente fantasias ou desejos sexuais contrários à castidade, mesmo quando não os transformo em ações?",
+      "explicacao": "Examina o consentimento interior em pensamentos e desejos desordenados. Pensamentos espontâneos, tentações involuntárias ou atrações não escolhidas não constituem, por si mesmos, pecado.",
+      "fundamentacaoCic": "CIC §§ 2514–2520."
+    },
+    {
+      "id": "A27",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 9,
+      "mandamentoTitulo": "Guardar castidade nos pensamentos e desejos",
+      "pergunta": "Tenho cultivado deliberadamente um olhar de desejo sexual desordenado sobre outras pessoas, reduzindo-as a objetos de satisfação pessoal?",
+      "explicacao": "Examina a pureza do olhar e da intenção, especialmente quando a pessoa alimenta conscientemente desejos contrários à dignidade alheia e à castidade.",
+      "fundamentacaoCic": "CIC §§ 2517–2522."
+    },
+    {
+      "id": "A28",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho alimentado inveja diante das conquistas, qualidades ou bens materiais de outras pessoas, chegando a desejar que percam aquilo que possuem?",
+      "explicacao": "Examina a inveja cultivada voluntariamente e a tristeza consentida diante do bem alheio. Admirar ou desejar alcançar legitimamente conquistas semelhantes não constitui, por si só, pecado.",
+      "fundamentacaoCic": "CIC §§ 2538–2540."
+    },
+    {
+      "id": "A29",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho permitido que a busca por dinheiro, patrimônio, poder ou prestígio domine minhas decisões, levando-me a desejar vantagens injustas?",
+      "explicacao": "Examina a avareza, a cobiça e o apego desordenado aos bens materiais. O trabalho honesto e a busca legítima por estabilidade financeira não são moralmente reprováveis.",
+      "fundamentacaoCic": "CIC §§ 2535–2537, 2544–2547."
+    },
+    {
+      "id": "A30",
+      "faixaEtaria": "adultos",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho me apegado excessivamente aos meus bens e ao meu conforto, deixando de praticar a generosidade e de socorrer pessoas necessitadas quando realmente poderia fazê-lo?",
+      "explicacao": "Examina a relação entre desapego material e caridade. Convida a refletir se a busca pelo próprio conforto levou à omissão diante de necessidades concretas, considerando as possibilidades e responsabilidades de cada pessoa.",
+      "fundamentacaoCic": "CIC §§ 2443–2449, 2544–2547."
+    },
+    {
+      "id": "J01",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho deixado de cultivar minha amizade com Deus, abandonando voluntariamente a oração e dando sempre preferência a outras atividades?",
+      "explicacao": "Examina a negligência deliberada da vida espiritual. Convida a refletir sobre o tempo dedicado à oração e ao relacionamento com Deus, sem confundir cansaço, distrações involuntárias ou dificuldades pessoais com rejeição da fé.",
+      "fundamentacaoCic": "CIC §§ 2098, 2697–2699."
+    },
+    {
+      "id": "J02",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho desprezado ou ridicularizado a fé católica, seus ensinamentos ou a prática religiosa de outras pessoas por vergonha, orgulho ou desejo de ser aceito pelos amigos?",
+      "explicacao": "Examina atitudes voluntárias de desprezo pela fé e pelo testemunho religioso. Fazer perguntas, ter dúvidas ou procurar entender melhor a doutrina faz parte da formação de uma fé consciente.",
+      "fundamentacaoCic": "CIC §§ 2087–2089, 2104–2105, 2471–2472."
+    },
+    {
+      "id": "J03",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho procurado horóscopos, tarô, cartomancia, invocação de espíritos ou outras formas de adivinhação, depositando nelas uma confiança que deveria colocar em Deus?",
+      "explicacao": "Examina a busca deliberada por práticas divinatórias ou ocultistas para conhecer o futuro ou influenciar acontecimentos. Não se refere ao simples contato com histórias fictícias que apresentam esses elementos.",
+      "fundamentacaoCic": "CIC §§ 2110–2117."
+    },
+    {
+      "id": "J04",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 2,
+      "mandamentoTitulo": "Não tomar seu Santo Nome em vão",
+      "pergunta": "Tenho usado o nome de Deus, de Jesus, de Nossa Senhora ou dos santos em xingamentos, deboches ou brincadeiras desrespeitosas?",
+      "explicacao": "Examina o respeito devido aos nomes sagrados, inclusive nas conversas com amigos, mensagens, vídeos e publicações nas redes sociais.",
+      "fundamentacaoCic": "CIC §§ 2142–2149."
+    },
+    {
+      "id": "J05",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 2,
+      "mandamentoTitulo": "Não tomar seu Santo Nome em vão",
+      "pergunta": "Tenho utilizado o nome de Deus para sustentar mentiras, fazer juramentos falsos ou prometer coisas que não pretendia cumprir?",
+      "explicacao": "Examina o uso indevido da autoridade divina para convencer outras pessoas ou encobrir comportamentos desonestos.",
+      "fundamentacaoCic": "CIC §§ 2147, 2150–2155."
+    },
+    {
+      "id": "J06",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho deixado de participar da Santa Missa aos domingos ou dias de preceito por simples desinteresse ou preguiça, mesmo quando tinha condições reais de participar?",
+      "explicacao": "Examina a responsabilidade pessoal diante da participação na Eucaristia. Deve-se considerar quando o adolescente depende dos pais ou responsáveis para comparecer à igreja, ou enfrenta impedimentos que não controla.",
+      "fundamentacaoCic": "CIC §§ 2180–2183."
+    },
+    {
+      "id": "J07",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho participado da Missa de maneira voluntariamente desrespeitosa, fazendo brincadeiras, conversando sem necessidade ou distraindo outras pessoas durante a celebração?",
+      "explicacao": "Examina atitudes conscientemente irreverentes durante a liturgia. Distrações involuntárias ou dificuldades de concentração não devem ser confundidas com desrespeito deliberado.",
+      "fundamentacaoCic": "CIC §§ 1385–1387, 2177–2179."
+    },
+    {
+      "id": "J08",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho deixado que jogos, redes sociais, festas ou outras diversões ocupem completamente meus domingos, sem reservar espaço para Deus, para a oração e para a convivência familiar?",
+      "explicacao": "Examina a santificação do domingo, sem considerar as diversões saudáveis como algo errado. O problema está no abandono voluntário das responsabilidades religiosas e familiares.",
+      "fundamentacaoCic": "CIC §§ 2184–2188."
+    },
+    {
+      "id": "J09",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho tratado meus pais ou responsáveis com grosseria, desprezo, humilhações ou respostas ofensivas, mesmo quando eles procuram me orientar de maneira justa?",
+      "explicacao": "Examina o respeito devido aos pais e responsáveis. Discordar, expressar opiniões ou estabelecer limites de maneira respeitosa não constitui desobediência pecaminosa.",
+      "fundamentacaoCic": "CIC §§ 2214–2217."
+    },
+    {
+      "id": "J10",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho desobedecido deliberadamente a orientações justas e proporcionais dos meus pais ou responsáveis, colocando minha segurança ou minhas responsabilidades em risco?",
+      "explicacao": "Examina a obediência legítima e responsável. Nenhum adolescente tem obrigação moral de obedecer a ordens que envolvam violência, abuso ou comportamentos contrários à dignidade humana.",
+      "fundamentacaoCic": "CIC §§ 2216–2217, 2238–2242."
+    },
+    {
+      "id": "J11",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho faltado intencionalmente com minhas responsabilidades familiares ou escolares por comodismo, prejudicando aqueles que contam comigo?",
+      "explicacao": "Examina a cooperação na vida familiar e o cumprimento dos deveres próprios da idade, como estudar, colaborar com tarefas razoáveis e respeitar compromissos assumidos.",
+      "fundamentacaoCic": "CIC §§ 2215–2217, 2228–2229."
+    },
+    {
+      "id": "J12",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho tratado irmãos, avós, professores ou outras pessoas que cuidam de mim com falta de respeito, desprezo ou ingratidão?",
+      "explicacao": "Examina o respeito nas relações familiares, escolares e comunitárias, inclusive a consideração por pessoas idosas ou vulneráveis. Não significa que autoridades ou adultos estejam acima de críticas justas.",
+      "fundamentacaoCic": "CIC §§ 2199, 2218–2220, 2238."
+    },
+    {
+      "id": "J13",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho ofendido, humilhado, ameaçado ou perseguido alguém, pessoalmente ou pela internet, participando de bullying ou cyberbullying?",
+      "explicacao": "Examina atitudes que causam sofrimento e atingem a dignidade das pessoas, incluindo apelidos humilhantes, exclusão intencional, ameaças e ataques em redes sociais.",
+      "fundamentacaoCic": "CIC §§ 2284–2287, 2302–2303."
+    },
+    {
+      "id": "J14",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho alimentado voluntariamente ódio, vingança ou desejo de causar sofrimento a alguém que me contrariou ou magoou?",
+      "explicacao": "Examina o desejo deliberado de fazer mal ao próximo. Sentir tristeza, raiva ou indignação diante de uma injustiça não é, por si só, pecado.",
+      "fundamentacaoCic": "CIC §§ 2302–2303, 2840–2845."
+    },
+    {
+      "id": "J15",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho colocado conscientemente minha saúde ou a segurança de outras pessoas em risco por meio de drogas, abuso de álcool, desafios perigosos ou comportamentos imprudentes?",
+      "explicacao": "Examina escolhas que representam riscos graves e evitáveis à vida e à saúde. Considera a influência de terceiros, a dependência e outras circunstâncias que possam comprometer a liberdade pessoal.",
+      "fundamentacaoCic": "CIC §§ 2288–2291."
+    },
+    {
+      "id": "J16",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho incentivado outras pessoas a praticar comportamentos prejudiciais ou deixado de prestar ajuda possível a alguém em situação de sofrimento ou perigo?",
+      "explicacao": "Examina a responsabilidade de não conduzir outras pessoas ao mal e de agir com solidariedade. Pedir ajuda a um adulto confiável diante de uma situação grave também é uma forma de cuidar do próximo.",
+      "fundamentacaoCic": "CIC §§ 1868, 2284–2287, 2447."
+    },
+    {
+      "id": "J17",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho procurado voluntariamente pornografia, vídeos, imagens ou outros conteúdos sexualmente explícitos para obter prazer?",
+      "explicacao": "Examina a procura deliberada por pornografia e a utilização de conteúdos que reduzem a sexualidade e a dignidade das pessoas a objetos de prazer. A exposição acidental ou forçada a esse material não é culpa de quem a sofreu.",
+      "fundamentacaoCic": "CIC §§ 2337–2339, 2354."
+    },
+    {
+      "id": "J18",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho praticado voluntariamente atos sexuais contrários à castidade, deixando de respeitar o significado do amor e da sexualidade ensinado pela Igreja?",
+      "explicacao": "Examina as escolhas relacionadas ao exercício da sexualidade, incluindo atos solitários e relações sexuais fora do Matrimônio. A avaliação da responsabilidade deve considerar a maturidade afetiva, o conhecimento, a liberdade e eventuais pressões sofridas.",
+      "fundamentacaoCic": "CIC §§ 2337–2345, 2350–2353."
+    },
+    {
+      "id": "J19",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho desrespeitado os limites corporais e afetivos de outras pessoas, pressionando-as a aceitar contatos íntimos ou a enviar imagens que não desejavam compartilhar?",
+      "explicacao": "Examina comportamentos de pressão, manipulação ou desrespeito à integridade física e à intimidade. Quem sofreu pressão, assédio, exploração ou abuso não deve ser levado a se reconhecer culpado por aquilo que fizeram contra sua vontade.",
+      "fundamentacaoCic": "CIC §§ 2337–2340, 2356, 2521–2524."
+    },
+    {
+      "id": "J20",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho pegado dinheiro, objetos, materiais escolares ou itens digitais de outras pessoas sem autorização, mesmo quando considerei que eram de pouco valor?",
+      "explicacao": "Examina o respeito pela propriedade alheia, inclusive nas relações com familiares, colegas e amigos. O valor do objeto e as circunstâncias são relevantes para avaliar a gravidade da falta.",
+      "fundamentacaoCic": "CIC §§ 2408–2409."
+    },
+    {
+      "id": "J21",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho obtido vantagens injustas nos estudos, jogos ou outras atividades, utilizando fraudes ou me apropriando do trabalho e dos resultados de outras pessoas?",
+      "explicacao": "Examina a honestidade e a justiça no ambiente escolar e digital, incluindo a apropriação de trabalhos alheios, o uso de meios fraudulentos para obter vantagens e a exploração injusta de outras pessoas.",
+      "fundamentacaoCic": "CIC §§ 2407–2409, 2410."
+    },
+    {
+      "id": "J22",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho danificado intencionalmente bens de outras pessoas ou deixado de devolver e reparar aquilo que tomei ou estraguei injustamente?",
+      "explicacao": "Examina a responsabilidade pelos bens alheios e o dever de reparar os danos causados. Acidentes sem culpa devem ser diferenciados dos prejuízos intencionais ou decorrentes de imprudência culpável.",
+      "fundamentacaoCic": "CIC §§ 2409, 2411–2412."
+    },
+    {
+      "id": "J23",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho mentido para meus pais, professores ou amigos com a intenção de enganá-los, conseguir vantagens ou escapar das consequências de atitudes erradas?",
+      "explicacao": "Examina a mentira deliberada e o uso da falsidade para manipular a confiança de outras pessoas. Deve-se distinguir a mentira da legítima proteção da intimidade diante de perguntas indevidas.",
+      "fundamentacaoCic": "CIC §§ 2482–2486, 2488–2489."
+    },
+    {
+      "id": "J24",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho espalhado boatos, fofocas, acusações ou informações sem confirmação, prejudicando a reputação de colegas, familiares ou outras pessoas?",
+      "explicacao": "Examina a calúnia, a maledicência e os julgamentos precipitados, inclusive quando praticados em grupos de mensagens, comentários e publicações digitais.",
+      "fundamentacaoCic": "CIC §§ 2477–2479, 2493–2499."
+    },
+    {
+      "id": "J25",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho divulgado segredos, conversas privadas, fotografias ou informações pessoais de outras pessoas sem motivo justo, expondo-as ao constrangimento ou à humilhação?",
+      "explicacao": "Examina o respeito à intimidade, à confidencialidade e à boa reputação. Revelar uma situação de abuso, violência ou perigo a alguém capaz de ajudar não é uma violação injusta do segredo.",
+      "fundamentacaoCic": "CIC §§ 2488–2492."
+    },
+    {
+      "id": "J26",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 9,
+      "mandamentoTitulo": "Guardar castidade nos pensamentos e desejos",
+      "pergunta": "Tenho alimentado voluntariamente fantasias e desejos sexuais desordenados, em vez de procurar orientar meus pensamentos para o respeito e a castidade?",
+      "explicacao": "Examina o consentimento em pensamentos contrários à pureza do coração. A atração, as mudanças corporais da adolescência, os sonhos involuntários e os pensamentos que surgem sem escolha não constituem, por si sós, pecado.",
+      "fundamentacaoCic": "CIC §§ 2514–2520."
+    },
+    {
+      "id": "J27",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 9,
+      "mandamentoTitulo": "Guardar castidade nos pensamentos e desejos",
+      "pergunta": "Tenho cultivado deliberadamente um olhar ou uma maneira de pensar que reduz outras pessoas a objetos de desejo, deixando de reconhecer sua dignidade e seus limites?",
+      "explicacao": "Examina a intenção interior e a maneira de considerar as outras pessoas. A simples percepção de que alguém é atraente não equivale ao consentimento em um desejo moralmente desordenado.",
+      "fundamentacaoCic": "CIC §§ 2517–2524."
+    },
+    {
+      "id": "J28",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho alimentado inveja pelos objetos, roupas, aparelhos eletrônicos ou condições financeiras de outras pessoas, chegando a desejar injustamente aquilo que lhes pertence?",
+      "explicacao": "Examina a cobiça material e a dificuldade em alegrar-se com o bem alheio. Desejar adquirir algo semelhante de maneira legítima não constitui pecado.",
+      "fundamentacaoCic": "CIC §§ 2535–2540."
+    },
+    {
+      "id": "J29",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho cultivado inveja da aparência, popularidade, talentos ou conquistas de outras pessoas, desejando que fracassem ou percam aquilo que possuem?",
+      "explicacao": "Examina a inveja voluntariamente alimentada, especialmente em situações de comparação social. Sentir insegurança ou reconhecer qualidades que gostaríamos de desenvolver não equivale a desejar o mal alheio.",
+      "fundamentacaoCic": "CIC §§ 2538–2540."
+    },
+    {
+      "id": "J30",
+      "faixaEtaria": "jovens",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho me tornado excessivamente apegado a dinheiro, marcas, aparência, curtidas ou reconhecimento social, deixando de praticar a gratidão e a generosidade?",
+      "explicacao": "Examina o apego desordenado aos bens e ao prestígio. Convida a refletir sobre a liberdade interior diante das pressões de consumo e da necessidade de aprovação social.",
+      "fundamentacaoCic": "CIC §§ 2544–2548."
+    },
+    {
+      "id": "C01",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho deixado de rezar ou conversar com Deus por preguiça, mesmo quando podia dedicar um pouquinho do meu tempo a Ele?",
+      "explicacao": "Ajuda a criança a reconhecer a importância da oração e da amizade com Deus. Esquecer uma oração ocasionalmente ou distrair-se sem querer não significa necessariamente ter pecado.",
+      "fundamentacaoCic": "CIC §§ 2098, 2697–2699."
+    },
+    {
+      "id": "C02",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho sentido vergonha de demonstrar minha fé e, por querer agradar aos outros, zombado de Deus, da Igreja ou das pessoas que rezam?",
+      "explicacao": "Examina o respeito pela fé e pelas práticas religiosas. Ter vergonha, medo ou dúvidas não é, por si só, pecado; a pergunta procura identificar atitudes voluntárias de desprezo.",
+      "fundamentacaoCic": "CIC §§ 2087–2089, 2144–2145."
+    },
+    {
+      "id": "C03",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 1,
+      "mandamentoTitulo": "Amar a Deus sobre todas as coisas",
+      "pergunta": "Tenho participado de adivinhações, brincadeiras de invocar espíritos ou outras práticas supersticiosas, acreditando que elas podem substituir minha confiança em Deus?",
+      "explicacao": "Ensina que devemos confiar em Deus, e não em supostos poderes ocultos. É importante distinguir a participação intencional nessas práticas de histórias ou brincadeiras de faz de conta.",
+      "fundamentacaoCic": "CIC §§ 2111, 2115–2117."
+    },
+    {
+      "id": "C04",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 2,
+      "mandamentoTitulo": "Não tomar seu Santo Nome em vão",
+      "pergunta": "Tenho usado o nome de Deus, de Jesus ou de Nossa Senhora em xingamentos ou brincadeiras desrespeitosas?",
+      "explicacao": "Ensina que os nomes sagrados merecem respeito e não devem ser utilizados para ofender, insultar ou zombar.",
+      "fundamentacaoCic": "CIC §§ 2142–2149."
+    },
+    {
+      "id": "C05",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 2,
+      "mandamentoTitulo": "Não tomar seu Santo Nome em vão",
+      "pergunta": "Tenho feito brincadeiras para debochar das orações, das coisas sagradas ou das pessoas enquanto estão rezando?",
+      "explicacao": "Examina atitudes voluntárias de desrespeito à oração e às coisas santas. Fazer perguntas ou não compreender determinadas práticas religiosas não é desrespeito.",
+      "fundamentacaoCic": "CIC §§ 2144–2148."
+    },
+    {
+      "id": "C06",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho me recusado a ir à Missa aos domingos por preguiça ou vontade de brincar, mesmo quando meus responsáveis podiam me levar?",
+      "explicacao": "Ajuda a criança a compreender a importância da Missa dominical. Não deve sentir culpa quando depende de adultos que não podem ou não querem levá-la à igreja.",
+      "fundamentacaoCic": "CIC §§ 2177–2183."
+    },
+    {
+      "id": "C07",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho feito brincadeiras, conversado sem necessidade ou atrapalhado outras pessoas de propósito durante a Santa Missa?",
+      "explicacao": "Examina o respeito durante as celebrações. Ficar inquieto, cansado ou distrair-se sem querer não deve ser confundido com a decisão de atrapalhar.",
+      "fundamentacaoCic": "CIC §§ 2177–2179."
+    },
+    {
+      "id": "C08",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 3,
+      "mandamentoTitulo": "Guardar domingos e festas de guarda",
+      "pergunta": "Tenho deixado de reservar algum tempo para Deus aos domingos, mesmo quando podia rezar ou participar das atividades religiosas com minha família?",
+      "explicacao": "Ajuda a compreender que o domingo é um dia especial para Deus, a família e o descanso. Brincar e divertir-se também são atividades boas e apropriadas.",
+      "fundamentacaoCic": "CIC §§ 2184–2188."
+    },
+    {
+      "id": "C09",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho respondido aos meus pais ou responsáveis com grosseria, xingamentos ou falta de respeito?",
+      "explicacao": "Examina a maneira de falar e tratar as pessoas responsáveis pelos cuidados da criança. Discordar educadamente ou contar que algo a deixou triste não é falta de respeito.",
+      "fundamentacaoCic": "CIC §§ 2214–2217."
+    },
+    {
+      "id": "C10",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho desobedecido de propósito a orientações justas dos meus pais ou responsáveis, mesmo sabendo que eram para meu bem?",
+      "explicacao": "Examina a desobediência voluntária a orientações razoáveis, como horários, cuidados com a segurança e responsabilidades diárias. A criança não deve obedecer a ordens abusivas ou perigosas.",
+      "fundamentacaoCic": "CIC §§ 2216–2217."
+    },
+    {
+      "id": "C11",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho deixado de cumprir minhas pequenas responsabilidades em casa ou na escola por preguiça, fazendo com que outras pessoas tenham que realizá-las por mim?",
+      "explicacao": "Examina a colaboração nas tarefas adequadas à idade, o cuidado com os materiais escolares e o cumprimento de compromissos. Considera as capacidades e as condições concretas de cada criança.",
+      "fundamentacaoCic": "CIC §§ 2215–2217, 2228."
+    },
+    {
+      "id": "C12",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 4,
+      "mandamentoTitulo": "Honrar pai e mãe",
+      "pergunta": "Tenho tratado meus irmãos, avós ou outros familiares com maldade, desprezo ou falta de carinho, quando poderia agir com respeito e bondade?",
+      "explicacao": "Examina o amor e o cuidado dentro da família. Desentendimentos ocasionais são diferentes de atitudes deliberadas de humilhação, abandono ou crueldade.",
+      "fundamentacaoCic": "CIC §§ 2204–2206, 2218–2220."
+    },
+    {
+      "id": "C13",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho batido, empurrado, machucado ou ameaçado alguém de propósito, por raiva ou vontade de fazer mal?",
+      "explicacao": "Ensina a respeitar o corpo e a segurança das outras pessoas, distinguindo agressões intencionais de acidentes.",
+      "fundamentacaoCic": "CIC §§ 2258, 2268–2269, 2302–2303."
+    },
+    {
+      "id": "C14",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho colocado apelidos maldosos, zombado ou excluído alguém de propósito para fazê-lo sofrer ou passar vergonha?",
+      "explicacao": "Examina atitudes de intimidação e humilhação, inclusive na escola, nos jogos e na internet. Ajuda a perceber que as palavras também podem causar sofrimento.",
+      "fundamentacaoCic": "CIC §§ 2284–2287, 2302–2303."
+    },
+    {
+      "id": "C15",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho desejado fazer mal ou me vingar de alguém, alimentando de propósito esses pensamentos em vez de procurar resolver o problema de maneira correta?",
+      "explicacao": "Examina o desejo voluntário de vingança. Sentir raiva quando alguém nos machuca ou trata injustamente é diferente de escolher fazer-lhe mal.",
+      "fundamentacaoCic": "CIC §§ 2302–2303."
+    },
+    {
+      "id": "C16",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 5,
+      "mandamentoTitulo": "Não matar",
+      "pergunta": "Tenho feito brincadeiras perigosas, sabendo que poderiam machucar a mim ou a outras pessoas, apenas para me divertir ou impressionar meus amigos?",
+      "explicacao": "Examina a responsabilidade de cuidar da própria segurança e da segurança dos outros, incluindo desafios perigosos e brincadeiras que podem provocar acidentes.",
+      "fundamentacaoCic": "CIC §§ 2288–2291."
+    },
+    {
+      "id": "C17",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho desrespeitado o corpo ou a intimidade de outras pessoas, tocando nelas sem permissão ou invadindo lugares onde precisavam de privacidade?",
+      "explicacao": "Ensina que o corpo humano merece respeito e que ninguém deve invadir a intimidade de outra pessoa. A criança também tem direito à proteção do próprio corpo e não é culpada por abusos que tenha sofrido.",
+      "fundamentacaoCic": "CIC §§ 2337–2339, 2356, 2521–2524."
+    },
+    {
+      "id": "C18",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho procurado ou compartilhado, de propósito, imagens ou vídeos impróprios para minha idade, que desrespeitam a intimidade das pessoas ou mostram o corpo de maneira desrespeitosa?",
+      "explicacao": "Esta pergunta nos ajuda a refletir sobre a importância de respeitar o nosso corpo e a intimidade das outras pessoas. Algumas imagens e vídeos mostram o corpo humano de uma maneira que não respeita sua dignidade. Procurar ou compartilhar esse tipo de conteúdo de propósito é diferente de encontrá-lo sem querer ou de alguém nos mostrar contra nossa vontade. Nessas situações, não temos culpa pelo que fizeram e podemos procurar um adulto de confiança.",
+      "fundamentacaoCic": "CIC §§ 2354, 2521–2525."
+    },
+    {
+      "id": "C19",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 6,
+      "mandamentoTitulo": "Não pecar contra a castidade",
+      "pergunta": "Tenho feito brincadeiras, gestos ou comentários desrespeitosos sobre o corpo e a intimidade de outras pessoas?",
+      "explicacao": "Examina o respeito pelo corpo humano e pelo pudor. Ensina a não transformar a intimidade das pessoas em motivo de brincadeira ou constrangimento.",
+      "fundamentacaoCic": "CIC §§ 2337–2339, 2521–2524."
+    },
+    {
+      "id": "C20",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho pegado dinheiro, brinquedos, materiais escolares ou objetos de outras pessoas sem pedir permissão?",
+      "explicacao": "Ensina a respeitar aquilo que pertence aos outros, mesmo quando o objeto parece ter pouco valor.",
+      "fundamentacaoCic": "CIC §§ 2408–2409."
+    },
+    {
+      "id": "C21",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho enganado outras pessoas para conseguir brinquedos, presentes, dinheiro ou vantagens que não eram meus por direito?",
+      "explicacao": "Examina as situações em que a criança utiliza a mentira ou a trapaça para obter injustamente aquilo que pertence a alguém.",
+      "fundamentacaoCic": "CIC §§ 2407–2409."
+    },
+    {
+      "id": "C22",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 7,
+      "mandamentoTitulo": "Não furtar",
+      "pergunta": "Tenho estragado de propósito coisas que pertencem a outras pessoas ou deixado de devolver objetos emprestados quando podia fazê-lo?",
+      "explicacao": "Examina o cuidado com os bens alheios e a obrigação de reparar os prejuízos injustamente causados, quando possível.",
+      "fundamentacaoCic": "CIC §§ 2409, 2411–2412."
+    },
+    {
+      "id": "C23",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho contado mentiras de propósito para esconder coisas erradas que fiz ou para conseguir aquilo que queria?",
+      "explicacao": "Examina o uso da mentira para enganar os outros. A criança deve ser incentivada a reconhecer seus erros e a dizer a verdade sem medo de humilhação.",
+      "fundamentacaoCic": "CIC §§ 2482–2486."
+    },
+    {
+      "id": "C24",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho colocado a culpa em outra pessoa por algo que eu fiz ou acusado alguém de uma coisa que sabia não ser verdade?",
+      "explicacao": "Examina as acusações falsas e a injustiça de fazer outra pessoa sofrer as consequências de uma mentira.",
+      "fundamentacaoCic": "CIC §§ 2476–2478."
+    },
+    {
+      "id": "C25",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 8,
+      "mandamentoTitulo": "Não levantar falso testemunho",
+      "pergunta": "Tenho espalhado fofocas, segredos ou histórias sobre outras pessoas para fazê-las passar vergonha ou para que os outros deixassem de gostar delas?",
+      "explicacao": "Examina o respeito pela reputação e pela intimidade. Contar a um adulto confiável uma situação de violência, abuso ou perigo não é fofoca.",
+      "fundamentacaoCic": "CIC §§ 2477–2479, 2488–2492."
+    },
+    {
+      "id": "C26",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 9,
+      "mandamentoTitulo": "Guardar castidade nos pensamentos e desejos",
+      "pergunta": "Tenho escolhido continuar pensando ou imaginando coisas que sabia serem desrespeitosas sobre o corpo ou a intimidade de outras pessoas?",
+      "explicacao": "Introduz, de maneira adequada à idade, o respeito à intimidade também nos pensamentos. A curiosidade própria do crescimento e os pensamentos que surgem sem querer não constituem, por si mesmos, pecado.",
+      "fundamentacaoCic": "CIC §§ 2514–2520, 2524."
+    },
+    {
+      "id": "C27",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 9,
+      "mandamentoTitulo": "Guardar castidade nos pensamentos e desejos",
+      "pergunta": "Tenho procurado de propósito observar a intimidade de alguém, mesmo sabendo que deveria respeitar sua privacidade?",
+      "explicacao": "Examina a pureza do olhar e o respeito à privacidade. É importante não confundir a curiosidade infantil espontânea com uma escolha consciente e desrespeitosa.",
+      "fundamentacaoCic": "CIC §§ 2520–2524."
+    },
+    {
+      "id": "C28",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho ficado com tanta inveja dos brinquedos ou objetos de outras crianças que desejei tirá-los delas ou que elas os perdessem?",
+      "explicacao": "Examina a inveja e a cobiça. Gostar de um brinquedo que outra criança possui ou querer ganhar um parecido não é pecado.",
+      "fundamentacaoCic": "CIC §§ 2535–2540."
+    },
+    {
+      "id": "C29",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho ficado com raiva ou tristeza por outra criança receber elogios, presentes ou conquistar algo bom, chegando a desejar que ela fracassasse?",
+      "explicacao": "Examina a inveja cultivada de propósito e a dificuldade de alegrar-se com a felicidade dos outros. Sentir uma decepção momentânea não é o mesmo que desejar o mal.",
+      "fundamentacaoCic": "CIC §§ 2538–2540."
+    },
+    {
+      "id": "C30",
+      "faixaEtaria": "criancas",
+      "mandamentoNumero": 10,
+      "mandamentoTitulo": "Não cobiçar as coisas alheias",
+      "pergunta": "Tenho sido egoísta com aquilo que possuo, recusando ajudar ou compartilhar alguma coisa quando podia e sabia que alguém realmente precisava?",
+      "explicacao": "Examina a generosidade e o desapego. Ensina que os bens devem ser utilizados com responsabilidade e que ajudar o próximo é uma maneira de demonstrar amor.",
+      "fundamentacaoCic": "CIC §§ 2443–2449, 2544–2547."
+    }
+  ]
+}
+;
+
+const audiences = [
   { id: 'adults', label: 'Adultos', age: '18 anos ou mais', description: 'Fé, família, trabalho e vida em comunidade.' },
   { id: 'youth', label: 'Jovens', age: '13 a 17 anos', description: 'Amizades, escolhas, estudos e vida digital.' },
   { id: 'children', label: 'Crianças', age: '7 a 12 anos', description: 'Perguntas simples sobre o amor a Deus e ao próximo.' },
 ];
 
-// Perguntas de reflexão, sem classificação de culpa. A ordem identifica as respostas da sessão.
-const commandments = [
+// Approved v1.1 content is stored only in the JSON file; these views retain its objects and IDs.
+const questionnaireVersion = questionnaire.schemaVersion;
+const questions = questionnaire.perguntas;
+const sourceAudiences = { adults: 'adultos', youth: 'jovens', children: 'criancas' };
+const commandmentDetails = [
   {
-    id: 'deus', numeral: 'I', title: 'Amar a Deus sobre todas as coisas', short: 'Meu encontro com Deus',
-    intro: 'Olhe com sinceridade para o lugar que Deus ocupa em sua vida. A oração é um encontro, e também pode recomeçar hoje.',
-    questions: {
-      adults: ['Tenho reservado tempo para a oração e para cultivar minha fé?', 'Coloquei dinheiro, poder, sucesso ou outras coisas acima de Deus?', 'Busquei na superstição ou em práticas de adivinhação a confiança que devo colocar em Deus?'],
-      youth: ['Tenho procurado conhecer Deus e conversar com Ele na oração?', 'Deixei que a aprovação dos outros ou as redes sociais ocupassem todo o espaço da minha vida?', 'Tive vergonha de viver a minha fé ou tratei com desprezo quem acredita em Deus?'],
-      children: ['Tenho me lembrado de conversar com Deus e agradecer pelo seu amor?', 'Procurei aprender sobre Jesus na catequese e em casa?', 'Deixei de fazer o bem para agradar os amigos?'],
-    },
-    explanations: {
-      "adults": [
-        "Reflita se deixou a oração de lado por indiferença, embora pudesse rezar. Distrações involuntárias ou uma rotina difícil não são, por si, falta de fé.",
-        "A falha pode estar em buscar dinheiro, prestígio ou poder a ponto de abandonar a fé e os deveres de amor. Trabalhar e buscar uma vida digna não são o problema.",
-        "Considere a busca de adivinhação ou de poder mágico para controlar a vida, em vez da confiança em Deus. Um símbolo religioso não deve ser tratado como amuleto."
-      ],
-      "youth": [
-        "Pense se você deixa Deus de lado por escolha própria, mesmo podendo dedicar algum tempo à oração. Ter perguntas sobre a fé não é o mesmo que rejeitá-la.",
-        "Observe se a busca por curtidas e aprovação levou você a descuidar da oração, das pessoas ou de suas responsabilidades. Usar redes sociais não é, por si, pecado.",
-        "Recorde se negou a própria fé para agradar alguém ou humilhou quem crê. Sentir timidez ou ter dificuldade para falar de Deus não equivale a desprezá-lo."
-      ],
-      "children": [
-        "Pense se você costuma se lembrar de Deus ou se o deixa de lado de propósito. Conversar com Ele pode ser um agradecimento simples, com suas próprias palavras.",
-        "Recorde se prestou atenção quando podia aprender sobre Jesus ou se atrapalhou de propósito. Não entender alguma coisa é uma oportunidade de perguntar.",
-        "Pense se participou de algo que sabia ser errado só para ser aceito, como excluir um colega. Você pode procurar um adulto de confiança para ajudar a escolher o bem."
-      ]
-    },
+    "id": "deus",
+    "numeral": "I",
+    "short": "Meu encontro com Deus",
+    "intro": "Olhe com sinceridade para o lugar que Deus ocupa em sua vida. A oração é um encontro, e também pode recomeçar hoje."
   },
   {
-    id: 'nome', numeral: 'II', title: 'Não tomar seu santo nome em vão', short: 'Respeito pelo que é sagrado',
-    intro: 'Nossas palavras podem expressar amor e reverência. Recorde como você fala de Deus e trata aquilo que é sagrado.',
-    questions: {
-      adults: ['Usei o nome de Deus, de Jesus ou dos santos de forma ofensiva ou desrespeitosa?', 'Fiz juramentos falsos ou usei a religião para justificar atitudes injustas?', 'Cumpri as promessas que fiz a Deus com liberdade e responsabilidade?'],
-      youth: ['Usei o nome de Deus para xingar, zombar ou fazer piadas ofensivas?', 'Compartilhei conteúdos que desrespeitam a fé ou o que é sagrado?', 'Prometi algo em nome de Deus sem intenção de cumprir?'],
-      children: ['Falei o nome de Deus ou de Jesus com carinho e respeito?', 'Fiz brincadeiras que desrespeitam a oração ou as coisas de Deus?', 'Usei o nome de Deus para dizer que uma mentira era verdade?'],
-    },
-    explanations: {
-      "adults": [
-        "Considere palavras usadas de propósito para insultar Deus, Jesus ou os santos. Uma expressão involuntária não é igual a uma ofensa escolhida conscientemente.",
-        "Jurar sabendo que é mentira ou usar o nome de Deus para encobrir uma injustiça são exemplos. A religião não torna correto aquilo que fere a verdade ou o próximo.",
-        "Recorde compromissos assumidos livremente e deixados de lado por descuido. Se fez uma promessa imprudente ou prejudicial, peça orientação ao sacerdote."
-      ],
-      "youth": [
-        "Pense em xingamentos ou piadas feitos de propósito para ofender Deus ou a fé. Uma palavra que escapou sem intenção precisa ser distinguida de uma ofensa deliberada.",
-        "Reflita se compartilhou algo para ridicularizar a fé ou incentivar o desprezo pelo sagrado. Fazer perguntas respeitosas ou discordar com respeito é diferente de ofender.",
-        "Observe se invocou Deus para dar credibilidade a algo que já sabia que não cumpriria. Promessas impensadas podem ser conversadas com um sacerdote."
-      ],
-      "children": [
-        "Recorde como falou de Deus e de Jesus. Usar seus nomes para xingar ou zombar de propósito é diferente de fazer uma pergunta sincera sobre a fé.",
-        "Pense se atrapalhou uma oração ou fez uma brincadeira para desrespeitar o que é sagrado. Uma distração sem querer não é a mesma coisa que zombar.",
-        "Dizer “juro por Deus” sabendo que está mentindo é um exemplo. O caminho do bem é contar a verdade, reconhecer o erro e procurar repará-lo."
-      ]
-    },
+    "id": "nome",
+    "numeral": "II",
+    "short": "Respeito pelo que é sagrado",
+    "intro": "Nossas palavras podem expressar amor e reverência. Recorde como você fala de Deus e trata aquilo que é sagrado."
   },
   {
-    id: 'domingo', numeral: 'III', title: 'Guardar domingos e festas', short: 'Um tempo para o Senhor',
-    intro: 'O domingo nos convida à Eucaristia, ao descanso e à caridade. Considere também suas possibilidades reais, como saúde e cuidado de outras pessoas.',
-    questions: {
-      adults: ['Faltei à Missa aos domingos ou dias de preceito por escolha própria, sem motivo sério?', 'Participei da celebração com atenção e respeito?', 'Procurei reservar o domingo para Deus, para o descanso, para a família e para quem precisa?'],
-      youth: ['Deixei de participar da Missa quando eu realmente podia ir?', 'Procurei prestar atenção e participar da celebração?', 'Reservei algum tempo do domingo para a oração, a convivência e o bem ao próximo?'],
-      children: ['Quando pude ir à Missa com minha família, participei com respeito?', 'Procurei ouvir a Palavra de Deus e aprender com ela?', 'No domingo, lembrei de Deus e procurei estar com quem cuida de mim?'],
-    },
-    explanations: {
-      "adults": [
-        "Considere uma ausência escolhida sem motivo sério. Doença, cuidado indispensável de alguém e outras impossibilidades reais devem ser levados em conta.",
-        "Reflita se escolheu conversar, perturbar ou tratar a celebração com desprezo. Distrações involuntárias e dificuldades de concentração não equivalem a desrespeito deliberado.",
-        "Pense se ignorou de propósito a oração, o descanso e o cuidado com as pessoas. Trabalho necessário e responsabilidades de cuidado também devem ser considerados."
-      ],
-      "youth": [
-        "Recorde se podia ir à Missa, mas decidiu não ir sem motivo sério. Se você depende de transporte ou da decisão de responsáveis, considere o que estava ao seu alcance.",
-        "Observe se conversou ou atrapalhou a celebração de propósito. Perder a atenção sem querer é diferente de escolher desrespeitar aquele momento.",
-        "Pense se deixou todo o domingo para distrações, sem espaço para Deus e para as pessoas. Considere também compromissos necessários e suas possibilidades reais."
-      ],
-      "children": [
-        "Pense se procurou participar com respeito quando pôde ir. Se ninguém podia levar você, isso não foi uma escolha sua nem uma falta pela qual deva se culpar.",
-        "Recorde se tentou ouvir e aprender ou se atrapalhou de propósito. Se algo foi difícil de entender, você pode perguntar a um responsável ou catequista.",
-        "Pense se encontrou um tempinho para agradecer a Deus e conviver com quem cuida de você. Brincar e descansar também fazem parte de um bom domingo."
-      ]
-    },
+    "id": "domingo",
+    "numeral": "III",
+    "short": "Um tempo para o Senhor",
+    "intro": "O domingo nos convida à Eucaristia, ao descanso e à caridade. Considere também suas possibilidades reais, como saúde e cuidado de outras pessoas."
   },
   {
-    id: 'familia', numeral: 'IV', title: 'Honrar pai e mãe', short: 'Amor dentro de casa',
-    intro: 'Pense nas relações familiares e nas responsabilidades de cuidado. Honrar não significa aceitar violência ou obedecer a uma ordem injusta.',
-    questions: {
-      adults: ['Tratei meus pais, familiares e as pessoas sob meus cuidados com respeito e paciência?', 'Fui omisso nas responsabilidades com filhos, idosos ou pessoas que dependem de mim?', 'Abusei da minha autoridade ou deixei de escutar quem precisava de atenção?'],
-      youth: ['Tratei meus pais ou responsáveis com respeito, mesmo quando discordamos?', 'Deixei de cumprir responsabilidades justas em casa ou nos estudos?', 'Procurei dialogar e ajudar minha família, em vez de agir com desprezo?'],
-      children: ['Respeitei e escutei as pessoas que cuidam de mim quando me pedem algo bom?', 'Ajudei em casa nas tarefas que consigo fazer?', 'Fui grosseiro com meus familiares ou briguei sem procurar fazer as pazes?'],
-    },
-    explanations: {
-      "adults": [
-        "Recorde insultos, desprezo ou falta de cuidado que poderia ter evitado. Discordar com respeito e estabelecer limites para se proteger de uma violência não são desonra.",
-        "Observe se deixou de oferecer cuidado necessário quando tinha condições de fazê-lo. Limites financeiros, de saúde e de capacidade precisam ser considerados.",
-        "Impor medo, humilhar ou usar uma posição de autoridade para controlar alguém injustamente são exemplos. Autoridade deve servir ao cuidado e à dignidade da pessoa."
-      ],
-      "youth": [
-        "Pense em insultos, humilhações ou atitudes de desprezo em casa. Discordar com respeito não é faltar com o dever de honrar; você não deve obedecer a uma ordem injusta.",
-        "Recorde tarefas e estudos que deixou de lado por descuido, embora pudesse cumpri-los. Dificuldades de aprendizagem ou falta de condições não são simples má vontade.",
-        "Observe se recusou ajuda possível, ignorou uma conversa ou tratou familiares com desprezo. Dialogar também permite expressar seus limites de forma respeitosa."
-      ],
-      "children": [
-        "Pense se desobedeceu de propósito a um pedido justo ou tratou mal quem cuida de você. Uma ordem para machucar, mentir ou aceitar algo perigoso não deve ser obedecida.",
-        "Recorde pequenas tarefas que podia fazer, mas deixou para os outros por descuido. A ajuda deve ser adequada à sua idade e ao que você consegue realizar.",
-        "Pense se xingou, provocou brigas ou se recusou a pedir desculpas depois de machucar alguém. Fazer as pazes não significa aceitar que alguém maltrate você."
-      ]
-    },
+    "id": "familia",
+    "numeral": "IV",
+    "short": "Amor dentro de casa",
+    "intro": "Pense nas relações familiares e nas responsabilidades de cuidado. Honrar não significa aceitar violência ou obedecer a uma ordem injusta."
   },
   {
-    id: 'vida', numeral: 'V', title: 'Não matar', short: 'O cuidado com a vida',
-    intro: 'Toda pessoa tem dignidade. Reflita sobre suas atitudes de cuidado, respeito e reconciliação, consigo e com os outros.',
-    questions: {
-      adults: ['Feri a dignidade de alguém com violência, humilhação, preconceito ou indiferença?', 'Alimentei ódio, desejo de vingança ou recusei procurar a reconciliação possível?', 'Descuidei deliberadamente da minha saúde ou coloquei a vida de outras pessoas em risco?'],
-      youth: ['Pratiquei ou incentivei bullying, ameaças, racismo ou humilhações, inclusive na internet?', 'Alimentei raiva ou vingança em vez de procurar uma forma segura de resolver conflitos?', 'Coloquei minha saúde ou a segurança de alguém em risco de propósito?'],
-      children: ['Machuquei alguém de propósito com palavras ou atitudes?', 'Zombei de um colega, excluí alguém ou participei de bullying?', 'Cuidei de mim, das outras pessoas, dos animais e da natureza?'],
-    },
-    explanations: {
-      "adults": [
-        "Agressões, ameaças, humilhações e discriminação são exemplos de ofensa à dignidade. Pense nas próprias escolhas; uma violência sofrida não é culpa da vítima.",
-        "Reflita se alimentou de propósito a vontade de ferir ou se vingar. Sentir raiva ou precisar manter distância de alguém perigoso não é o mesmo que escolher o ódio.",
-        "Considere riscos assumidos de propósito, como dirigir alcoolizado, ou descuidos evitáveis. Estar doente ou precisar de ajuda não é uma falta moral."
-      ],
-      "youth": [
-        "Insultar, ameaçar, excluir para humilhar ou compartilhar uma agressão para divertir os outros são exemplos. Participar pela internet também pode machucar de verdade.",
-        "Pense se planejou humilhar ou ferir alguém por vingança. Sentir raiva não é o mesmo que agir mal; buscar ajuda para resolver o conflito é um caminho de cuidado.",
-        "Brincadeiras perigosas ou incentivar alguém a se arriscar podem ferir a vida. Se você está sofrendo ou teve sua segurança ameaçada, procure um adulto de confiança."
-      ],
-      "children": [
-        "Pense se bateu, ameaçou ou usou palavras para machucar alguém de propósito. Um acidente sem intenção é diferente de escolher ferir.",
-        "Apelidos que humilham, risadas para envergonhar e deixar alguém de fora para machucar são exemplos. Você pode pedir ajuda para parar uma situação de bullying.",
-        "Recorde se maltratou alguém, um animal ou a natureza de propósito. Considere o que você já sabe fazer e como pode reparar um cuidado que deixou de ter."
-      ]
-    },
+    "id": "vida",
+    "numeral": "V",
+    "short": "O cuidado com a vida",
+    "intro": "Toda pessoa tem dignidade. Reflita sobre suas atitudes de cuidado, respeito e reconciliação, consigo e com os outros."
   },
   {
-    id: 'castidade', numeral: 'VI', title: 'Não pecar contra a castidade', short: 'Amar com respeito',
-    intro: 'O amor convida ao respeito pelo corpo, pela dignidade e pela vocação de cada pessoa. Algo sofrido sem seu consentimento não é sua culpa.',
-    questions: {
-      adults: ['Procurei viver a sexualidade de acordo com a castidade própria do meu estado de vida?', 'Tratei alguém como objeto de prazer ou consumi pornografia?', 'Desrespeitei a fidelidade no casamento ou os limites e a dignidade de outra pessoa?'],
-      youth: ['Respeitei meu corpo, minha intimidade e a dignidade de outras pessoas?', 'Procurei conteúdos que transformam pessoas em objetos ou compartilhei imagens íntimas?', 'Pressionei alguém ou desrespeitei seus limites em um relacionamento?'],
-      children: ['Tratei meu corpo e o corpo das outras pessoas com respeito?', 'Respeitei a privacidade dos outros e os seus limites?', 'Fiz brincadeiras ou comentários que deixaram outra pessoa constrangida com o próprio corpo?'],
-    },
-    explanations: {
-      "adults": [
-        "Reflita sobre escolhas como relações sexuais fora do matrimônio ou infidelidade. A castidade envolve respeito, fidelidade e domínio de si, conforme seu estado de vida.",
-        "Considere a procura voluntária de pornografia ou o uso de alguém apenas para satisfação pessoal. Algo visto sem querer é diferente de escolher procurar ou consumir.",
-        "Violar compromissos conjugais, manipular ou pressionar alguém são exemplos. Algo sofrido sem seu consentimento não é sua culpa."
-      ],
-      "youth": [
-        "Pense em atitudes que desrespeitam sua intimidade ou a de outra pessoa. As mudanças do corpo e os sentimentos espontâneos não são, por si, pecado.",
-        "Procurar pornografia ou repassar imagens íntimas desrespeita a dignidade das pessoas. Receber algo sem pedir não é o mesmo que escolher procurar ou compartilhar.",
-        "Insistir depois de um não, manipular ou usar ameaças para obter afeto são exemplos. Se alguém fez isso com você, a responsabilidade não é sua."
-      ],
-      "children": [
-        "Cuidar do corpo é tratá-lo com respeito, sem machucar ou humilhar ninguém. Se alguém desrespeitou você, procure um adulto de confiança: isso não é sua culpa.",
-        "Invadir a privacidade de alguém ou insistir em tocar depois que a pessoa disse não são exemplos de desrespeito. Você também pode pedir ajuda para proteger seus limites.",
-        "Apelidos sobre o corpo, piadas e brincadeiras que envergonham alguém podem machucar. Pense se fez isso de propósito e como pode reparar."
-      ]
-    },
+    "id": "castidade",
+    "numeral": "VI",
+    "short": "Amar com respeito",
+    "intro": "O amor convida ao respeito pelo corpo, pela dignidade e pela vocação de cada pessoa. Algo sofrido sem seu consentimento não é sua culpa."
   },
   {
-    id: 'justica', numeral: 'VII', title: 'Não furtar', short: 'Justiça e generosidade',
-    intro: 'A honestidade se revela nas pequenas e grandes escolhas. Pergunte-se também como você pode reparar um dano e partilhar o que tem.',
-    questions: {
-      adults: ['Peguei ou retive algo que não me pertence, ou fui desonesto em negócios e no trabalho?', 'Deixei de pagar o que devo ou de remunerar alguém de maneira justa?', 'Desperdicei recursos ou ignorei quem precisava da minha ajuda quando eu podia ajudar?'],
-      youth: ['Peguei coisas sem permissão ou deixei de devolver algo emprestado?', 'Fui desonesto em provas, trabalhos, jogos ou compras?', 'Cuidei dos bens de outras pessoas e procurei partilhar com quem precisa?'],
-      children: ['Peguei algo que não era meu sem pedir?', 'Devolvi o que peguei emprestado e cuidei das coisas dos outros?', 'Procurei dividir e ajudar quem tem menos do que eu?'],
-    },
-    explanations: {
-      "adults": [
-        "Considere apropriação de bens, fraude, retenção injusta ou desonestidade no trabalho. Quando possível, reparar inclui devolver ou restituir o que foi tirado.",
-        "Reflita se reteve um pagamento justo ou deixou uma dívida sem pagar apesar de poder fazê-lo. Incapacidade real de pagar não é o mesmo que recusar uma obrigação.",
-        "Pense no desperdício deliberado e na recusa de ajuda possível a alguém necessitado. Considere seus recursos, responsabilidades e as formas concretas de partilhar."
-      ],
-      "youth": [
-        "Pegar dinheiro ou objetos sem permissão, guardar algo encontrado sem procurar o dono ou não devolver um empréstimo são exemplos. Procure devolver ou reparar.",
-        "Colar, apresentar trabalho de outra pessoa como seu ou enganar para obter vantagem são exemplos. Pedir ajuda e colaborar quando isso é permitido são atitudes diferentes.",
-        "Reflita se danificou algo de propósito, desperdiçou recursos ou negou uma ajuda que podia oferecer. Partilhar deve respeitar também os bens e os direitos dos outros."
-      ],
-      "children": [
-        "Pegar um brinquedo, dinheiro ou outro objeto sabendo que não é seu e sem permissão é um exemplo. Se aconteceu, procure devolver e pedir desculpas.",
-        "Pense se estragou algo por descuido que podia evitar ou deixou de devolver o que pegou emprestado. Um acidente sem intenção deve ser distinguido de uma escolha ruim.",
-        "Recorde uma ajuda ou partilha que estava ao seu alcance e você recusou por egoísmo. Ser generoso não significa dar algo que pertence a outra pessoa sem pedir."
-      ]
-    },
+    "id": "justica",
+    "numeral": "VII",
+    "short": "Justiça e generosidade",
+    "intro": "A honestidade se revela nas pequenas e grandes escolhas. Pergunte-se também como você pode reparar um dano e partilhar o que tem."
   },
   {
-    id: 'verdade', numeral: 'VIII', title: 'Não levantar falso testemunho', short: 'Palavras que constroem',
-    intro: 'A verdade caminha com a caridade. Recorde se suas palavras protegeram ou feriram a reputação e a confiança de outras pessoas.',
-    questions: {
-      adults: ['Menti, caluniei ou espalhei comentários que feriram a reputação de alguém?', 'Compartilhei acusações ou notícias sem verificar se eram verdadeiras?', 'Revelei confidências ou usei a verdade para humilhar, sem necessidade ou caridade?'],
-      youth: ['Menti para evitar responsabilidades ou enganar alguém?', 'Espalhei fofocas, boatos, prints ou acusações sem verificar?', 'Quebrei a confiança de alguém ao revelar um segredo ou expor sua intimidade?'],
-      children: ['Contei mentiras ou culpei outra pessoa por algo que fiz?', 'Espalhei fofocas ou falei mal de um colega?', 'Tive coragem de dizer a verdade e pedir desculpas quando errei?'],
-    },
-    explanations: {
-      "adults": [
-        "Inventar uma acusação, enganar de propósito ou espalhar defeitos alheios sem razão justa são exemplos. Repare, quando possível, o dano causado à verdade e à reputação.",
-        "Reflita se divulgou informações duvidosas sem o cuidado que podia ter. Saber que algo é falso e ainda assim compartilhar é diferente de um engano de boa-fé.",
-        "Revelar confidências para expor ou humilhar pode ferir a caridade. Comunicar uma injustiça ou pedir ajuda para proteger alguém, de modo responsável, é diferente de fofoca."
-      ],
-      "youth": [
-        "Pense se inventou uma história ou escondeu a verdade para enganar alguém e escapar de uma responsabilidade. Você pode reconhecer o erro e procurar corrigir o dano.",
-        "Repassar boatos, acusações e prints para expor alguém pode ferir a verdade e sua reputação. Antes de compartilhar, considere a veracidade, a necessidade e o respeito.",
-        "Contar um segredo para humilhar ou se divertir às custas de alguém quebra a confiança. Pedir ajuda diante de violência ou perigo não é uma traição."
-      ],
-      "children": [
-        "Dizer algo que você sabe ser falso ou culpar um colega para escapar de uma consequência são exemplos. Não lembrar bem de um fato não é o mesmo que mentir.",
-        "Pense se espalhou uma história para fazer os outros rirem de alguém ou prejudicá-lo. Contar a um adulto de confiança que alguém está em perigo não é fofoca.",
-        "Recorde se escondeu um erro para enganar ou recusou um pedido de desculpas que podia fazer. Pedir ajuda para contar a verdade também é um passo de coragem."
-      ]
-    },
+    "id": "verdade",
+    "numeral": "VIII",
+    "short": "Palavras que constroem",
+    "intro": "A verdade caminha com a caridade. Recorde se suas palavras protegeram ou feriram a reputação e a confiança de outras pessoas."
   },
   {
-    id: 'coracao', numeral: 'IX', title: 'Não desejar a mulher do próximo', short: 'A fidelidade do coração',
-    intro: 'Este mandamento convida à pureza do coração e ao respeito pelos vínculos das outras pessoas. Uma tentação ou um pensamento involuntário não é o mesmo que consentir.',
-    questions: {
-      adults: ['Alimentei deliberadamente desejos de infidelidade ou de desrespeito a uma união?', 'Cultivei relações ou atitudes que ameaçam a fidelidade e a confiança no casamento?', 'Procurei olhar as pessoas com respeito, sem reduzi-las aos meus desejos?'],
-      youth: ['Alimentei de propósito pensamentos que desrespeitam a dignidade de alguém?', 'Tentei interferir em um relacionamento por egoísmo ou ciúme?', 'Procurei cultivar amizades e afetos com sinceridade e respeito?'],
-      children: ['Procurei ter um coração bondoso e respeitar as pessoas?', 'Quis atrapalhar uma amizade porque estava com ciúme?', 'Tratei meus amigos com carinho, sem querer mandar neles ou impedir outras amizades?'],
-    },
-    explanations: {
-      "adults": [
-        "Considere o desejo de infidelidade que você escolhe alimentar. Uma atração espontânea ou um pensamento que aparece sem querer não equivale a consentir com ele.",
-        "Pense em flertes ou relações ocultadas que você escolheu cultivar em prejuízo da fidelidade conjugal. Ter amizades respeitosas não é o mesmo que buscar uma traição.",
-        "Reflita se escolheu alimentar fantasias ou atitudes que reduzem alguém a um objeto. Reconhecer a beleza de uma pessoa não é o mesmo que desrespeitá-la."
-      ],
-      "youth": [
-        "Pense em pensamentos que você escolheu alimentar para desrespeitar ou usar alguém. Um pensamento indesejado ou um sentimento espontâneo não é uma escolha culpável.",
-        "Espalhar mentiras ou manipular pessoas para destruir um vínculo por ciúme são exemplos. Sentir ciúme, por si só, não é o mesmo que escolher agir mal.",
-        "Observe se houve mentira, manipulação ou interesse em usar alguém em uma amizade ou namoro. Cultivar afeto com sinceridade inclui respeitar a liberdade do outro."
-      ],
-      "children": [
-        "Pense se guardou de propósito a vontade de machucar ou humilhar alguém. Um pensamento que apareceu sem querer não é igual a uma decisão de fazer o mal.",
-        "Tentar separar amigos com mentiras ou provocações por ciúme pode machucar. Sentir ciúme é diferente de escolher prejudicar uma amizade.",
-        "Pense se exigiu ser o único amigo de alguém ou fez chantagem para conseguir atenção. Bons amigos respeitam a liberdade e as outras amizades de cada um."
-      ]
-    },
+    "id": "coracao",
+    "numeral": "IX",
+    "short": "A fidelidade do coração",
+    "intro": "Este mandamento convida à pureza do coração e ao respeito pelos vínculos das outras pessoas. Uma tentação ou um pensamento involuntário não é o mesmo que consentir."
   },
   {
-    id: 'gratidao', numeral: 'X', title: 'Não cobiçar as coisas alheias', short: 'Um coração agradecido',
-    intro: 'A gratidão abre espaço para a alegria pelo bem do outro. Reflita sobre a inveja, o apego e a liberdade de viver com simplicidade.',
-    questions: {
-      adults: ['Alimentei inveja do que outras pessoas possuem ou das suas conquistas?', 'Deixei a ganância ou a comparação guiar minhas escolhas?', 'Procurei agradecer pelo que tenho e alegrar-me com o bem dos outros?'],
-      youth: ['Deixei a comparação com outras pessoas, inclusive nas redes, se transformar em inveja?', 'Desejei que alguém fracassasse para eu me sentir melhor?', 'Procurei valorizar o que tenho e celebrar as conquistas dos meus amigos?'],
-      children: ['Fiquei desejando que outra pessoa perdesse algo que eu queria ter?', 'Fui egoísta ou briguei porque queria ter tudo para mim?', 'Agradeci pelo que tenho e fiquei feliz quando algo bom aconteceu com um amigo?'],
-    },
-    explanations: {
-      "adults": [
-        "A inveja se manifesta quando você alimenta tristeza pelo bem do outro ou deseja que ele o perca. Querer melhorar a própria vida por meios justos é diferente disso.",
-        "Considere escolhas guiadas pelo desejo de ter sempre mais, mesmo prejudicando alguém. Perceber uma comparação ou uma vontade passageira não é o mesmo que alimentá-la.",
-        "Pense se cultivou ingratidão ou se recusou a reconhecer o bem de alguém por inveja. Não sentir alegria imediatamente é diferente de desejar deliberadamente o mal."
-      ],
-      "youth": [
-        "Reflita se a comparação levou você a alimentar inveja, desprezar alguém ou querer que perdesse algo bom. Admirar uma conquista e buscar crescer não são a mesma coisa.",
-        "Torcer de propósito para que alguém fracasse ou tentar atrapalhá-lo por inveja são exemplos. Uma competição justa permite desejar o próprio bem sem querer o mal do outro.",
-        "Pense se desmereceu uma conquista ou zombou de um amigo por inveja. Você pode escolher uma atitude de respeito, mesmo quando ainda está aprendendo a lidar com o que sente."
-      ],
-      "children": [
-        "Pense se quis de propósito que um colega perdesse um brinquedo, uma amizade ou algo bom. Querer um brinquedo parecido não é a mesma coisa que desejar o mal de alguém.",
-        "Brigar para ficar com tudo ou impedir os outros de brincar por egoísmo são exemplos. Você pode aprender a dividir e a respeitar o que pertence a cada um.",
-        "Recorde se estragou a alegria de alguém porque queria ter o que ele ganhou. Sentir uma pontinha de inveja não é igual a escolher machucar; procure um gesto de bondade."
-      ]
-    },
-  },
+    "id": "gratidao",
+    "numeral": "X",
+    "short": "Um coração agradecido",
+    "intro": "A gratidão abre espaço para a alegria pelo bem do outro. Reflita sobre a inveja, o apego e a liberdade de viver com simplicidade."
+  }
 ];
+
+const commandments = commandmentDetails.map((details, index) => ({
+  ...details,
+  title: questions.find((item) => item.mandamentoNumero === index + 1).mandamentoTitulo,
+  questions: Object.fromEntries(audiences.map((audience) => [audience.id,
+    questions.filter((item) => item.mandamentoNumero === index + 1 && item.faixaEtaria === sourceAudiences[audience.id]),
+  ])),
+}));
 
 const prayers = [
   {
@@ -608,16 +1247,18 @@ function createSession(audience = 'adults') {
   return { audience, index: 0, questionIndex: 0, started: false, answers: new Map(), note: '' };
 }
 
-function questionId(commandment, index) {
-  return `${commandment.id}-${index}`;
+function questionId(commandment, index, audience) {
+  return commandment.questions[audience][index].id;
 }
 
 function currentQuestion(session) {
   const theme = commandments[session.index];
+  const question = theme.questions[session.audience][session.questionIndex];
   return {
-    id: questionId(theme, session.questionIndex),
-    text: theme.questions[session.audience][session.questionIndex],
-    explanation: theme.explanations[session.audience][session.questionIndex],
+    id: question.id,
+    text: question.pergunta,
+    explanation: question.explicacao,
+    cic: question.fundamentacaoCic,
     position: commandments.slice(0, session.index).reduce((total, item) => total + item.questions[session.audience].length, 0) + session.questionIndex + 1,
     total: commandments.reduce((total, item) => total + item.questions[session.audience].length, 0),
   };
@@ -643,7 +1284,7 @@ function moveQuestion(session, direction) {
 function selectTheme(session, index) {
   if (!Number.isInteger(index) || index < 0 || index >= commandments.length) throw new RangeError('Tema inválido');
   session.index = index;
-  const unanswered = commandments[index].questions[session.audience].findIndex((_, i) => !session.answers.has(questionId(commandments[index], i)));
+  const unanswered = commandments[index].questions[session.audience].findIndex((question) => !session.answers.has(question.id));
   session.questionIndex = unanswered < 0 ? 0 : unanswered;
 }
 
@@ -660,7 +1301,7 @@ function answerGroups(session) {
   return commandments.map((item) => ({
     title: item.short,
     numeral: item.numeral,
-    questions: item.questions[session.audience].map((text, index) => ({ text, answer: session.answers.get(questionId(item, index)) })).filter((question) => question.answer),
+    questions: item.questions[session.audience].map((question) => ({ text: question.pergunta, answer: session.answers.get(question.id) })).filter((question) => question.answer),
   })).filter((item) => item.questions.length > 0);
 }
 
@@ -737,9 +1378,13 @@ function examination() {
   const item = commandments[session.index];
   const question = currentQuestion(session);
   const previous = session.answers.get(question.id);
-  return `<section class="container page-section examination"><div class="exam-toolbar"><button class="icon-button" data-action="previous" aria-label="${question.position === 1 ? 'Preparação' : 'Pergunta anterior'}">${icon('back')}</button><span>Pergunta <strong>${question.position}</strong> de ${question.total}</span><button class="icon-button" data-prayer="espirito" aria-label="Fazer uma oração">${icon('sun')}</button><button class="icon-button" data-action="reset" aria-label="Encerrar e apagar">${icon('close')}</button></div><progress value="${question.position}" max="${question.total}" aria-label="Pergunta atual do exame">${question.position} de ${question.total}</progress>
-    <div class="exam-theme"><p class="eyebrow">${session.index + 1}º MANDAMENTO · ${audience().label}</p><h1>${session.audience === 'children' ? item.short : item.title}</h1><button class="text-button" data-action="themes">Escolher tema ${icon('chevron')}</button></div>
-    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="question-explanation answer-instruction${previous ? ' current-answer' : ''}"><p class="swipe-question" id="current-question">${escape(question.text)}</p><p class="question-explanation" id="question-explanation">${escape(question.explanation)}</p></div>
+  return `<section class="container page-section examination" data-questionnaire-version="${escape(questionnaireVersion)}"><div class="exam-toolbar"><button class="icon-button" data-action="previous" aria-label="${question.position === 1 ? 'Preparação' : 'Pergunta anterior'}">${icon('back')}</button><span>Pergunta <strong>${question.position}</strong> de ${question.total}</span><button class="icon-button" data-prayer="espirito" aria-label="Fazer uma oração">${icon('sun')}</button><button class="icon-button" data-action="reset" aria-label="Encerrar e apagar">${icon('close')}</button></div>
+    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="question-explanation question-cic answer-instruction${previous ? ' current-answer' : ''}">
+      <div class="exam-theme"><p class="eyebrow">${escape(question.id)} · ${session.index + 1}º MANDAMENTO · ${audience().label}</p><h1>${escape(item.title)}</h1><progress value="${question.position}" max="${question.total}" aria-label="Pergunta ${question.position} de ${question.total}">${question.position} de ${question.total}</progress><button class="text-button" data-action="themes">Escolher tema ${icon('chevron')}</button></div>
+      <p class="swipe-question examen-pergunta" id="current-question">${escape(question.text)}</p>
+      <section class="question-detail" aria-labelledby="explanation-title"><h2 id="explanation-title">EXPLICAÇÃO</h2><p class="question-explanation examen-explicacao" id="question-explanation">${escape(question.explanation)}</p></section>
+      <section class="question-detail" aria-labelledby="cic-title"><h2 id="cic-title">FUNDAMENTAÇÃO NO CIC</h2><p class="examen-cic" id="question-cic">${escape(question.cic)}</p></section>
+    </div>
     ${previous ? `<p class="current-answer" id="current-answer">Resposta anterior: <strong>${answerLabels[previous]}</strong>. Você pode alterá-la.</p>` : ''}<p class="answer-instruction" id="answer-instruction">Toque em uma opção para responder.</p>
     <div class="answer-actions" role="group" aria-label="Escolha sua resposta"><button class="answer-button answer-yes" data-answer="yes" aria-label="Sim"><span>SIM</span></button><button class="answer-button answer-no" data-answer="no" aria-label="Não"><span>NÃO</span></button><button class="answer-button answer-skip" data-answer="skip" aria-label="Pular pergunta"><span>PULAR</span></button></div>
     <div class="exam-navigation"><span class="quiet-note">${icon('lock')} Só nesta sessão</span><a class="text-button" href="#resumo">Ver resumo ${icon('arrow')}</a></div>
@@ -799,6 +1444,7 @@ function go(route) {
 
 function showNextQuestion() {
   render({ focus: false });
+  window.scrollTo(0, 0);
   document.querySelector('.swipe-card')?.focus({ preventScroll: true });
 }
 
@@ -856,15 +1502,19 @@ if (document.querySelector('link[rel="manifest"]') && 'serviceWorker' in navigat
 document.addEventListener('pointerdown', (event) => {
   if (!event.isPrimary) { cancelGesture(); return; }
   const card = event.target.closest('.swipe-card');
-  if (!card || event.button !== 0 || gesture || document.querySelector('dialog[open]')) return;
-  gesture = { card, pointerId: event.pointerId, x: event.clientX, y: event.clientY, id: card.dataset.question };
+  if (!card || event.button !== 0 || gesture || event.target.closest('button, a, input, textarea, select, summary') || document.querySelector('dialog[open]')) return;
+  // Vertical swipes on the question still skip; the explanation and CIC allow
+  // native vertical scrolling, so reading a long card cannot submit an answer.
+  const allowVertical = event.pointerType !== 'touch' || Boolean(event.target.closest('.swipe-question'));
+  gesture = { card, pointerId: event.pointerId, x: event.clientX, y: event.clientY, id: card.dataset.question, allowVertical };
   card.classList.add('is-dragging');
   card.setPointerCapture(event.pointerId);
 });
 
 document.addEventListener('pointermove', (event) => {
   if (!gesture || gesture.pointerId !== event.pointerId) return;
-  gesture.card.dataset.swipe = swipeAnswer(event.clientX - gesture.x, event.clientY - gesture.y) || '';
+  const answer = swipeAnswer(event.clientX - gesture.x, event.clientY - gesture.y);
+  gesture.card.dataset.swipe = answer === 'skip' && !gesture.allowVertical ? '' : answer || '';
 });
 
 document.addEventListener('pointerup', (event) => {
@@ -873,7 +1523,7 @@ document.addEventListener('pointerup', (event) => {
   const answer = swipeAnswer(event.clientX - active.x, event.clientY - active.y);
   cancelGesture();
   if (active.card.hasPointerCapture(event.pointerId)) active.card.releasePointerCapture(event.pointerId);
-  if (answer && currentRoute() === 'exame' && active.id === currentQuestion(session).id) submitAnswer(answer);
+  if (answer && (answer !== 'skip' || active.allowVertical) && currentRoute() === 'exame' && active.id === currentQuestion(session).id) submitAnswer(answer);
 });
 document.addEventListener('pointercancel', cancelGesture);
 document.addEventListener('lostpointercapture', cancelGesture);
@@ -946,7 +1596,7 @@ document.addEventListener('input', (event) => {
 
 document.addEventListener('keydown', (event) => {
   const answer = { ArrowLeft: 'yes', ArrowRight: 'no', ArrowUp: 'skip' }[event.key];
-  if (answer && event.target.closest('.swipe-card') && !document.querySelector('dialog[open]')) {
+  if (answer && event.target.closest('.swipe-card') && !event.target.closest('button, a, input, textarea, select, summary') && !document.querySelector('dialog[open]')) {
     event.preventDefault();
     if (!event.repeat) submitAnswer(answer);
     return;
@@ -966,7 +1616,7 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) render({ f
 window.addEventListener('hashchange', () => { for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close(); render(); });
 render({ focus: false });
 </script>
-  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="EXAMEN" /><meta name="recomeco-version" content="1a90d775996160d4b364" /></head>
+  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="EXAMEN" /><meta name="recomeco-version" content="da0bf94ed062248974e0" /></head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div id="app"><main class="container page-section"><p class="eyebrow">EXAMEN</p><div class="page-heading"><h1>Seu momento de reflexão.</h1><p>Se o aplicativo não iniciar, feche esta visualização e abra novamente o resultado atualizado.</p></div></main></div>
