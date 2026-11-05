@@ -175,7 +175,10 @@ textarea::placeholder { font-size: 12px; color: var(--muted); }
 .confession-aside h2 { margin-top: 10px; font-size: 31px; }
 .confession-aside > p:not(.eyebrow) { font-size: 12px; color: var(--cream); margin-top: 18px; }
 .confession-aside .button { width: 100%; margin-top: 22px; background: var(--cream); color: var(--navy); }
-.confession-aside .text-button { color: var(--light-gold); width: 100%; }
+.next-step-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 10px; margin-top: 22px; }
+.confession-aside .next-step-actions .button { width: 100%; min-height: 84px; margin: 0; padding: 14px 10px; color: var(--navy); background: var(--cream); border: 1px solid var(--gold); font-size: 11px; font-weight: 600; line-height: 1.8; text-align: center; }
+.confession-aside .next-step-actions .button:hover { background: var(--warm-white); }
+.confession-aside .next-step-actions .button:focus-visible { outline-color: var(--light-gold); }
 .confession-aside hr { border: 0; border-top: 1px solid var(--gold); margin-top: 14px; }
 .confession-aside .aside-small { font-size: 11px; }
 
@@ -254,6 +257,14 @@ dialog::backdrop { background: #03152C99; backdrop-filter: blur(3px); }
 .dialog-top h2 { font-size: 27px; margin: 0; }
 dialog h2 { font-size: 31px; margin-block: 11px 20px; }
 .prayer-text p { font: 23px/1.7 var(--subtitle); margin-top: 20px; }
+.pre-confession-prayer-title { font-size: 25px; margin-block: 20px 0; }
+.confession-directions { margin-top: 29px; padding-top: 23px; border-top: 1px solid var(--line); }
+.confession-directions > h3 { font-size: 27px; margin-bottom: 23px; }
+.confession-directions ol { list-style: none; padding: 0; margin: 0; }
+.confession-directions li { display: flex; align-items: start; gap: 13px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+.confession-directions li:last-child { padding-bottom: 0; margin-bottom: 0; border: 0; }
+.confession-directions h4 { font: 600 24px/1.3 var(--subtitle); margin: 1px 0 10px; }
+.confession-directions p { color: var(--muted); font-size: 12px; line-height: 1.9; }
 .dialog-bottom { margin-top: 24px; width: 100%; }
 dialog > p:not(.eyebrow) { font-size: 13px; color: var(--muted); line-height: 1.9; }
 .dialog-actions { display: flex; flex-direction: column-reverse; gap: 10px; margin-top: 24px; }
@@ -716,7 +727,7 @@ function steps(active) {
 
 function preparation() {
   return `<section class="container page-section preparation">${steps(0)}<div class="page-heading"><p class="eyebrow">COMECE COM CALMA</p><h1>Um pouco de silêncio.<br>Um coração aberto.</h1><p>Reserve este momento para olhar para a sua vida com sinceridade e confiança.</p></div>
-    <button class="prayer-row" data-prayer="espirito"><span class="card-icon">${icon('sun')}</span><span>Rezar antes de começar<small>Oração ao Espírito Santo</small></span>${icon('chevron')}</button>
+    <button class="prayer-row" data-prayer="espirito" data-confession-guide aria-label="Rezar antes de começar"><span class="card-icon">${icon('sun')}</span><span>Rezar antes de começar<small>Oração ao Espírito Santo</small></span>${icon('chevron')}</button>
     <fieldset class="audience-fieldset"><legend>Para quem é este exame?</legend><p class="field-description">Escolha a linguagem mais adequada para você.</p><div class="audience-options">${audiences.map((item) => `<label class="audience-option"><input type="radio" name="audience" value="${item.id}" ${session.audience === item.id ? 'checked' : ''} ${session.started ? 'disabled' : ''}><span><strong>${item.label}</strong><span class="age">${item.age}</span><span class="audience-description">${item.description}</span></span>${icon('check', 'audience-check')}</label>`).join('')}</div></fieldset>
     ${session.started ? '<p class="field-description">Para mudar a faixa etária, encerre o exame atual.</p><button class="text-button" data-action="reset">Encerrar e apagar</button>' : ''}
     <div class="prep-action"><button class="button primary" data-action="start">${session.started ? 'Continuar meu exame' : 'Iniciar meu exame'} ${icon('arrow')}</button><span>Uma pergunta por vez, no seu tempo.</span></div><div class="notice">${icon('circle')}<p>Este é um auxílio à preparação. A confissão e a absolvição acontecem no encontro com um sacerdote.</p></div></section>`;
@@ -741,8 +752,8 @@ function summary() {
     <div class="summary-layout"><div><div class="summary-heading"><h2>Seus pontos de reflexão</h2><a href="#exame" class="text-button">Revisar exame ${icon('back')}</a></div><p class="field-description">Estas são suas respostas, incluindo as perguntas puladas. Sim e Não se referem ao texto de cada pergunta; nenhuma resposta é classificada automaticamente como pecado.</p>
     ${groups.length ? groups.map((group) => `<section class="summary-group"><h3><span>${group.numeral}</span>${group.title}</h3><ul>${group.questions.map((question) => `<li class="summary-answer"><p>${escape(question.text)}</p><span class="answer-badge" data-value="${question.answer}">${answerLabels[question.answer]}</span></li>`).join('')}</ul></section>`).join('') : `<div class="empty-state">${icon('cross')}<h3>Um espaço para o que está no coração.</h3><p>Você ainda não registrou respostas. Pode voltar às perguntas ou seguir com a preparação para a confissão.</p><a class="text-button" href="#exame">Voltar às reflexões ${icon('arrow')}</a></div>`}
     <div class="note-field"><label for="private-note">Algo mais que você quer recordar?</label><p id="note-help" class="field-description">Anotação opcional, apenas nesta aba. Evite nomes ou informações de outras pessoas.</p><textarea id="private-note" maxlength="2000" rows="5" placeholder="Escreva uma lembrança ou um propósito de mudança…" aria-describedby="note-help" autocomplete="off" spellcheck="false">${escape(session.note)}</textarea><span class="note-counter"><span id="note-count">${session.note.length}</span>/2000</span></div>
-    <div class="notice">${icon('lock')}<p>Deixe esta aba aberta para consultar. Recarregar ou encerrar apaga suas respostas e anotações.</p></div><button class="button secondary reset-button" data-action="reset">${icon('close')} Encerrar e apagar tudo</button></div>
-    <aside class="confession-aside"><span class="card-icon">${icon('cross')}</span><p class="eyebrow">O PRÓXIMO PASSO</p><h2>Na confissão,<br>você não está só.</h2><p>O sacerdote está ali para acolher e orientar. Se não souber como começar, basta dizer.</p><a class="button primary" href="#guia">Como se confessar ${icon('arrow')}</a><button class="text-button" data-prayer="contricao">Rezar o ato de contrição</button><hr><p class="aside-small">Arrepender-se também é desejar mudar. Pense em um passo concreto de amor, reparação ou reconciliação.</p></aside></div></section>`;
+    <div class="notice">${icon('lock')}<p>Deixe esta aba aberta para consultar. Recarregar ou encerrar apaga suas respostas e anotações.</p></div></div>
+    <aside class="confession-aside"><span class="card-icon">${icon('cross')}</span><p class="eyebrow">O PRÓXIMO PASSO</p><h2>Na confissão,<br>você não está só.</h2><p>O sacerdote está ali para acolher e orientar. Se não souber como começar, basta dizer.</p><div class="next-step-actions" role="group" aria-label="Opções para o próximo passo"><a class="button next-step-button" href="#guia">Como se confessar</a><button class="button next-step-button" data-prayer="contricao">Rezar ato de contrição</button></div><hr><p class="aside-small">Arrepender-se também é desejar mudar. Pense em um passo concreto de amor, reparação ou reconciliação.</p></aside></div><button class="button secondary reset-button" data-action="reset">${icon('close')} Encerrar e apagar tudo</button></section>`;
 }
 
 function guide() {
@@ -869,12 +880,15 @@ document.addEventListener('lostpointercapture', cancelGesture);
 window.addEventListener('blur', cancelGesture);
 document.addEventListener('visibilitychange', cancelGesture);
 
-function showPrayer(id) {
+function showPrayer(id, withGuidance = false) {
   const prayer = prayers.find((item) => item.id === id);
   if (!prayer) return;
   const dialog = document.querySelector('#prayer-dialog');
-  dialog.innerHTML = `<div class="dialog-top"><span class="card-icon">${icon('sun')}</span><button class="icon-button" data-action="close-prayer" aria-label="Fechar oração">${icon('close')}</button></div><p class="eyebrow">${prayer.label}</p><h2 id="prayer-title">${prayer.title}</h2><div class="prayer-text">${prayer.text.split('\n\n').map((paragraph) => `<p>${escape(paragraph)}</p>`).join('')}</div><button class="button primary dialog-bottom" data-action="close-prayer">Continuar ${icon('arrow')}</button>`;
+  const beforeConfession = withGuidance && id === 'espirito';
+  const guidance = beforeConfession ? `<section class="confession-directions" aria-labelledby="confession-directions-title"><h3 id="confession-directions-title">Orientações para a confissão</h3><ol>${confessionSteps.map((step, index) => `<li><span class="guide-number">${String(index + 1).padStart(2, '0')}</span><div><h4>${escape(step.title)}</h4><p>${escape(step.text)}</p></div></li>`).join('')}</ol></section>` : '';
+  dialog.innerHTML = `<div class="dialog-top"><span class="card-icon">${icon('sun')}</span><button class="icon-button" data-action="close-prayer" aria-label="Fechar oração">${icon('close')}</button></div><p class="eyebrow">${beforeConfession ? 'PREPARE O CORAÇÃO' : prayer.label}</p><h2 id="prayer-title">${beforeConfession ? 'Antes de confessar' : prayer.title}</h2>${beforeConfession ? `<h3 class="pre-confession-prayer-title">${escape(prayer.title)}</h3>` : ''}<div class="prayer-text">${prayer.text.split('\n\n').map((paragraph) => `<p>${escape(paragraph)}</p>`).join('')}</div>${guidance}<button class="button primary dialog-bottom" data-action="close-prayer">Continuar ${icon('arrow')}</button>`;
   dialog.showModal();
+  dialog.scrollTop = 0;
 }
 
 function confirmReset() {
@@ -890,7 +904,7 @@ document.addEventListener('click', (event) => {
     return;
   }
   const prayerButton = event.target.closest('[data-prayer]');
-  if (prayerButton) { showPrayer(prayerButton.dataset.prayer); return; }
+  if (prayerButton) { showPrayer(prayerButton.dataset.prayer, prayerButton.hasAttribute('data-confession-guide')); return; }
   const indexButton = event.target.closest('[data-index]');
   if (indexButton) { selectTheme(session, Number(indexButton.dataset.index)); document.querySelector('#themes-dialog').close(); render(); return; }
   const answerButton = event.target.closest('[data-answer]');
@@ -952,7 +966,7 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) render({ f
 window.addEventListener('hashchange', () => { for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close(); render(); });
 render({ focus: false });
 </script>
-  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="Recomeço" /><meta name="recomeco-version" content="af21ad94561e88e48dba" /></head>
+  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="Recomeço" /><meta name="recomeco-version" content="1529129fee41134b96ae" /></head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div id="app"><main class="container page-section"><p class="eyebrow">RECOMEÇO</p><div class="page-heading"><h1>Seu momento de reflexão.</h1><p>Se o aplicativo não iniciar, feche esta visualização e abra novamente o resultado atualizado.</p></div></main></div>

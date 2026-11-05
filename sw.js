@@ -1,7 +1,7 @@
 // Cache public application files only. Never cache answers, notes, or requests
 // outside this application's origin and explicitly listed paths.
 const CACHE_PREFIX = `recomeco-static-${encodeURIComponent(new URL(self.registration.scope).pathname)}-`;
-const CACHE_NAME = `${CACHE_PREFIX}af21ad94561e88e48dba`;
+const CACHE_NAME = `${CACHE_PREFIX}1529129fee41134b96ae`;
 const ASSETS = ['./', './manifest.webmanifest', './favicon.svg', './icons/app-192.png', './icons/app-512.png']
   .map((path) => new URL(path, self.registration.scope).href);
 const HOME = ASSETS[0];
