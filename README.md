@@ -1,6 +1,6 @@
-# Recomeço — versão de teste
+# EXAMEN — versão de teste
 
-Aplicativo de exame de consciência da Paróquia Verbo Divino, preparado para avaliação.
+Seu assistente católico de exame de consciência. Aplicativo da Paróquia Verbo Divino, preparado para avaliação.
 
 Esta branch contém somente os arquivos estáticos da versão de teste. A página é autocontida: perguntas, fontes e assinatura oficial estão incorporadas. As licenças das fontes estão em licenses/.
 

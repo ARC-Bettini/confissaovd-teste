@@ -1,9 +1,9 @@
 {
   "id": "./",
-  "name": "Recomeço · Paróquia Verbo Divino",
-  "short_name": "Recomeço",
+  "name": "EXAMEN — Seu assistente católico de exame de consciência.",
+  "short_name": "EXAMEN",
   "lang": "pt-BR",
-  "description": "Um caminho privado de oração e exame de consciência para a confissão católica.",
+  "description": "Seu assistente católico de exame de consciência.",
   "start_url": "./#inicio",
   "scope": "./",
   "display": "standalone",
