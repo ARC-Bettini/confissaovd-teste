@@ -215,6 +215,12 @@ progress::-moz-progress-bar { background: var(--gold); border-radius: 10px; }
 .examen-pergunta { width: 100%; font: 500 29px/1.4 var(--subtitle); color: var(--navy); text-align: center; overflow-wrap: break-word; }
 .question-detail { width: 100%; min-width: 0; padding-top: 17px; border-top: 1px solid var(--line); }
 .question-detail h2 { margin-bottom: 9px; font: 600 10px/1.7 var(--title); letter-spacing: .8px; color: var(--brown); text-align: left; }
+.question-applicability { width: 100%; padding: 17px 14px; border: 1px solid var(--gold); border-radius: 12px; background: var(--warm-white); text-align: left; }
+.question-applicability h2 { margin-bottom: 9px; font: 600 10px/1.7 var(--title); letter-spacing: .8px; color: var(--brown); }
+.question-applicability p { font-size: 12px; line-height: 1.85; color: var(--navy); }
+.precepts-related { margin-top: 8px; padding-top: 11px; border-top: 1px solid var(--line); }
+.precepts-related p { font-size: 10px; color: var(--muted); }
+.precepts-related .text-button { min-height: 44px; }
 .examen-explicacao, .examen-cic { font: 400 13px/1.85 var(--body); text-align: justify; text-align-last: left; hyphens: auto; overflow-wrap: break-word; color: var(--muted); }
 .answer-instruction { margin-top: 17px; color: var(--muted); font-size: 11px; line-height: 1.8; text-align: center; }
 .current-answer { margin-top: 12px; font-size: 10px; color: var(--muted); line-height: 1.7; text-align: center; }
@@ -261,6 +267,16 @@ details > p { color: var(--muted); font-size: 12px; margin-top: 12px; }
 .prose p, .prose li { font-size: 13px; line-height: 1.9; color: var(--muted); margin-top: 14px; }
 .prose ul { padding-left: 20px; }
 .prose .button { margin-top: 23px; }
+.tips-section { margin-top: 22px; padding: 22px 18px; background: var(--warm-white); border: 1px solid var(--line); border-radius: 16px; }
+.tips-section h2 { font-size: 25px; line-height: 1.4; margin-bottom: 16px; }
+.tips-section p, .tips-list { font-size: 13px; line-height: 1.9; color: var(--muted); }
+.tips-section p + p { margin-top: 14px; }
+.tips-list { padding-left: 21px; margin-block: 19px 0; }
+.tips-list li + li { margin-top: 15px; }
+.tips-list strong { color: var(--navy); }
+.tips-reminders, .tips-notes { margin-top: 23px; padding: 17px 14px; background: var(--cream); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; }
+.tips-divider { margin-block: 27px 0; border: 0; border-top: 1px solid var(--gold); }
+.tips-continue { width: 100%; margin-top: 24px; }
 
 /* Native modal sheets, with focus containment and Escape support. */
 dialog { width: min(100%, var(--app-width)); max-height: min(86dvh, 800px); overflow-y: auto; margin: auto auto 0; padding: 26px 24px calc(26px + env(safe-area-inset-bottom, 0px)); background: var(--warm-white); color: var(--navy); border: 1px solid var(--gold); border-bottom: 0; border-radius: 25px 25px 0 0; box-shadow: 0 -12px 70px #03152C1A; }
@@ -34941,6 +34957,146 @@ module.exports = {
   ]
 }
 ;
+const precepts = {
+  "schemaVersion": "1.2",
+  "tema": {
+    "id": "preceitos",
+    "titulo": "Os Preceitos da Igreja",
+    "introducao": "Os preceitos ajudam a viver a fé na comunidade. Considere sua idade, a preparação para os sacramentos e suas possibilidades reais.",
+    "missaJaAbordada": {
+      "adultos": "A06",
+      "jovens": "J06",
+      "criancas": "C06"
+    }
+  },
+  "orientacoesExistentes": {
+    "A07": "Esta pergunta é dirigida a quem já foi preparado e admitido à Sagrada Comunhão. Se você ainda não recebeu essa preparação ou ainda não foi admitido a esse sacramento, escolha PULAR. Se já comungou e tem dúvidas sobre sua disposição naquele momento, converse com o sacerdote.",
+    "C06": "Considere também a Missa nos demais dias de preceito, conforme a orientação da Igreja. Leve em conta que você depende dos seus responsáveis para ir à igreja. Se não sabe se este dever se aplica à sua situação, escolha PULAR e peça ajuda ao sacerdote ou ao catequista."
+  },
+  "perguntas": [
+    {
+      "id": "A31",
+      "faixaEtaria": "adultos",
+      "temaId": "preceitos",
+      "preceito": "confissao",
+      "pergunta": "Tenho negligenciado a obrigação de confessar os pecados graves ao menos uma vez ao ano?",
+      "explicacao": "O preceito pede que os pecados graves sejam confessados ao menos uma vez por ano. Reflita sobre uma omissão consciente quando você tinha condições de procurar o sacramento. Em caso de dúvida sobre a gravidade ou a obrigação, converse com o confessor.",
+      "fundamentacaoCic": "CIC §§ 2042, 1457.",
+      "aplicabilidade": "Considere esta pergunta se você já pode receber o sacramento da Confissão. Se ainda não está preparado para recebê-lo ou a obrigação sobre pecados graves não se aplica à sua situação, escolha PULAR e peça orientação ao sacerdote."
+    },
+    {
+      "id": "A32",
+      "faixaEtaria": "adultos",
+      "temaId": "preceitos",
+      "preceito": "comunhao",
+      "pergunta": "Tenho cumprido o dever de receber a Sagrada Comunhão ao menos no tempo pascal, com a preparação devida?",
+      "explicacao": "A Igreja pede aos fiéis que recebam a Eucaristia ao menos no tempo pascal, com a preparação devida. Considere sua preparação espiritual, eventuais impedimentos reais e as orientações do sacerdote ao refletir sobre esse preceito.",
+      "fundamentacaoCic": "CIC §§ 2042, 1385, 1415.",
+      "aplicabilidade": "Considere esta pergunta se você já foi preparado e admitido à Sagrada Comunhão. Se ainda não recebeu essa preparação ou ainda não foi admitido ao sacramento, escolha PULAR. Em caso de impedimento ou dúvida sobre sua situação, procure o sacerdote."
+    },
+    {
+      "id": "A33",
+      "faixaEtaria": "adultos",
+      "temaId": "preceitos",
+      "preceito": "penitencia",
+      "pergunta": "Tenho observado os dias de jejum e abstinência que me obrigam segundo a disciplina da Igreja?",
+      "explicacao": "Os dias de penitência incluem as práticas de jejum e abstinência previstas pela Igreja. Considere somente as obrigações que se aplicam à sua idade e situação, observando a disciplina local e eventuais dispensas.",
+      "fundamentacaoCic": "CIC §§ 2043, 1438. Código de Direito Canônico, cân. 1252–1253.",
+      "aplicabilidade": "Pela norma geral, a abstinência obriga a partir dos 14 anos e o jejum dos 18 aos 59 anos. A partir dos 60 anos, considere as obrigações que ainda se aplicam a você. Leve em conta a saúde, as dispensas e a disciplina local. Se este item não se aplica à sua situação, escolha PULAR."
+    },
+    {
+      "id": "A34",
+      "faixaEtaria": "adultos",
+      "temaId": "preceitos",
+      "preceito": "sustento",
+      "pergunta": "Tenho contribuído para as necessidades materiais da Igreja de acordo com minhas possibilidades?",
+      "explicacao": "A contribuição para as necessidades da Igreja deve respeitar as possibilidades reais de cada pessoa. Considere o apoio material que podia oferecer, sem comprometer o necessário para você e para quem depende de seus cuidados.",
+      "fundamentacaoCic": "CIC §§ 2043, 1351.",
+      "aplicabilidade": "Se você não dispõe de recursos para contribuir sem comprometer necessidades básicas suas ou de quem depende de você, escolha PULAR. O preceito considera as possibilidades reais de cada pessoa."
+    },
+    {
+      "id": "J31",
+      "faixaEtaria": "jovens",
+      "temaId": "preceitos",
+      "preceito": "confissao",
+      "pergunta": "Tenho deixado de me confessar ao menos uma vez por ano quando tenho pecados graves a confessar e já posso receber esse sacramento?",
+      "explicacao": "Reflita se deixou de procurar a Confissão quando precisava e tinha condições de fazê-lo. O preceito anual se refere aos pecados graves; o sacerdote pode ajudar você a compreender suas dúvidas e a se preparar.",
+      "fundamentacaoCic": "CIC §§ 2042, 1457.",
+      "aplicabilidade": "Se você ainda não está preparado para receber a Confissão ou a obrigação sobre pecados graves não se aplica à sua situação, escolha PULAR. Peça orientação ao sacerdote ou a quem acompanha sua catequese. A primeira Confissão também pode ser preparada com essa ajuda."
+    },
+    {
+      "id": "J32",
+      "faixaEtaria": "jovens",
+      "temaId": "preceitos",
+      "preceito": "comunhao",
+      "pergunta": "Tenho recebido a Sagrada Comunhão ao menos no tempo pascal, quando já posso comungar e estou devidamente preparado?",
+      "explicacao": "A Igreja pede a Comunhão ao menos no tempo pascal, com a preparação devida. Considere sua preparação, suas possibilidades reais e a orientação do sacerdote, inclusive quando depende de responsáveis para ir à igreja.",
+      "fundamentacaoCic": "CIC §§ 2042, 1385, 1415.",
+      "aplicabilidade": "Esta pergunta é para quem já foi preparado e admitido à Comunhão. Se você ainda não recebeu essa preparação ou ainda não foi admitido ao sacramento, escolha PULAR. Em caso de impedimento ou dúvida sobre sua situação, converse com o sacerdote."
+    },
+    {
+      "id": "J33",
+      "faixaEtaria": "jovens",
+      "temaId": "preceitos",
+      "preceito": "penitencia",
+      "pergunta": "Tenho respeitado os dias de abstinência que já se aplicam à minha idade, seguindo a orientação da Igreja?",
+      "explicacao": "A abstinência é uma prática de penitência vivida conforme a disciplina da Igreja. Reflita somente sobre o que já se aplica à sua idade, considerando também a saúde, eventuais dispensas e a orientação recebida.",
+      "fundamentacaoCic": "CIC §§ 2043, 1438. Código de Direito Canônico, cân. 1252–1253.",
+      "aplicabilidade": "Se você tem 13 anos, escolha PULAR: a abstinência obriga, em regra, a partir dos 14 anos. Dos 14 aos 17 anos, considere a abstinência conforme a disciplina local. O jejum não é obrigatório nesta faixa etária. Se está dispensado das obrigações deste item, escolha PULAR."
+    },
+    {
+      "id": "J34",
+      "faixaEtaria": "jovens",
+      "temaId": "preceitos",
+      "preceito": "sustento",
+      "pergunta": "Tenho colaborado com as necessidades materiais da Igreja quando tenho recursos próprios e condições de ajudar?",
+      "explicacao": "A ajuda material à Igreja deve considerar o que está realmente ao seu alcance. Reflita sobre a generosidade possível, respeitando suas necessidades e as orientações dos responsáveis.",
+      "fundamentacaoCic": "CIC §§ 2043, 1351.",
+      "aplicabilidade": "Se você não tem recursos próprios disponíveis ou depende de uma decisão dos seus responsáveis para contribuir, escolha PULAR. Você não precisa assumir o dever financeiro da sua família."
+    },
+    {
+      "id": "C31",
+      "faixaEtaria": "criancas",
+      "temaId": "preceitos",
+      "preceito": "confissao",
+      "pergunta": "Tenho deixado de me confessar ao menos uma vez por ano quando tenho pecados graves a confessar e já estou preparado para a Confissão?",
+      "explicacao": "A Confissão é um encontro com a misericórdia de Deus. Quando há pecados graves, a Igreja pede que sejam confessados ao menos uma vez por ano. Um sacerdote pode ajudar você a entender suas dúvidas e a se preparar.",
+      "fundamentacaoCic": "CIC §§ 2042, 1457.",
+      "aplicabilidade": "Se você ainda não está preparado para a Confissão ou essa obrigação não se aplica à sua situação, escolha PULAR e peça ajuda ao sacerdote ou ao catequista. Se esta for sua primeira Confissão, você pode se preparar com essa ajuda."
+    },
+    {
+      "id": "C32",
+      "faixaEtaria": "criancas",
+      "temaId": "preceitos",
+      "preceito": "comunhao",
+      "pergunta": "Depois de estar preparado para comungar, tenho recebido Jesus na Sagrada Comunhão ao menos no tempo pascal, com a preparação devida?",
+      "explicacao": "A Comunhão é o encontro com Jesus na Eucaristia. A Igreja pede que a recebamos ao menos no tempo pascal, com a preparação devida. Considere também quando você depende de adultos para ir à igreja.",
+      "fundamentacaoCic": "CIC §§ 2042, 1385, 1415.",
+      "aplicabilidade": "Se você ainda não foi preparado e admitido para a Primeira Comunhão, escolha PULAR. Se tem dúvida sobre poder comungar, peça ajuda ao sacerdote ou ao catequista antes de responder."
+    },
+    {
+      "id": "C33",
+      "faixaEtaria": "criancas",
+      "temaId": "preceitos",
+      "preceito": "penitencia",
+      "pergunta": "Tenho seguido a orientação da Igreja sobre jejum e abstinência, quando essas práticas se aplicam à minha idade?",
+      "explicacao": "Jejum e abstinência são práticas de penitência. A Igreja também convida as crianças a aprender a partilhar, rezar e fazer o bem de formas adequadas à sua idade.",
+      "fundamentacaoCic": "CIC §§ 2043, 1438. Código de Direito Canônico, cân. 1252–1253.",
+      "aplicabilidade": "No seu perfil, de 7 a 12 anos, você ainda não está obrigado ao jejum nem à abstinência pela norma geral da Igreja. Para esta pergunta, escolha PULAR. Um responsável pode orientar formas de penitência adequadas à sua idade."
+    },
+    {
+      "id": "C34",
+      "faixaEtaria": "criancas",
+      "temaId": "preceitos",
+      "preceito": "sustento",
+      "pergunta": "Tenho ajudado nas necessidades da Igreja com aquilo que posso oferecer?",
+      "explicacao": "A Igreja precisa de ajuda material para sua missão. Cada pessoa contribui conforme suas possibilidades. Uma criança deve conversar com seus responsáveis antes de oferecer dinheiro ou bens.",
+      "fundamentacaoCic": "CIC §§ 2043, 1351.",
+      "aplicabilidade": "Se você depende dos seus responsáveis e não tem recursos próprios que possa oferecer, escolha PULAR. Converse com eles sobre formas de ajudar que sejam adequadas à sua idade e às possibilidades da família."
+    }
+  ]
+}
+;
 
 const audiences = [
   { id: 'adults', label: 'Adultos', age: '18 anos ou mais', description: 'Fé, família, trabalho e vida em comunidade.' },
@@ -34948,9 +35104,11 @@ const audiences = [
   { id: 'children', label: 'Crianças', age: '7 a 12 anos', description: 'Perguntas simples sobre o amor a Deus e ao próximo.' },
 ];
 
-// Approved v1.1 content is stored only in the JSON file; these views retain its objects and IDs.
-const questionnaireVersion = questionnaire.schemaVersion;
-const questions = questionnaire.perguntas;
+// The original 90 items keep their text/IDs; the supplement adds four precepts
+// per profile. Sunday Mass remains solely in the Third Commandment.
+const questionnaireVersion = precepts.schemaVersion;
+const questions = [...questionnaire.perguntas, ...precepts.perguntas];
+const applicabilityNotices = precepts.orientacoesExistentes;
 const sourceAudiences = { adults: 'adultos', youth: 'jovens', children: 'criancas' };
 const commandmentDetails = [
   {
@@ -35017,11 +35175,21 @@ const commandmentDetails = [
 
 const commandments = commandmentDetails.map((details, index) => ({
   ...details,
+  kind: 'commandment',
   title: questions.find((item) => item.mandamentoNumero === index + 1).mandamentoTitulo,
   questions: Object.fromEntries(audiences.map((audience) => [audience.id,
     questions.filter((item) => item.mandamentoNumero === index + 1 && item.faixaEtaria === sourceAudiences[audience.id]),
   ])),
 }));
+
+commandments.push({
+  id: precepts.tema.id, kind: 'precepts', numeral: '',
+  title: precepts.tema.titulo, short: precepts.tema.titulo, intro: precepts.tema.introducao,
+  relatedQuestions: Object.fromEntries(audiences.map((audience) => [audience.id, precepts.tema.missaJaAbordada[sourceAudiences[audience.id]]])),
+  questions: Object.fromEntries(audiences.map((audience) => [audience.id,
+    precepts.perguntas.filter((question) => question.faixaEtaria === sourceAudiences[audience.id]),
+  ])),
+});
 
 const prayers = [
   {
@@ -35046,6 +35214,42 @@ const confessionSteps = [
   { title: 'Agradeça e recomece', text: 'Agradeça a Deus, cumpra a penitência recebida e procure reparar os danos que causou. Peça a graça de viver concretamente seu propósito de mudança.' },
 ];
 
+// Text supplied by the user, kept in full rather than summarized.
+const preparationAdvice = {
+  introduction: 'O Catecismo ensina que, para existir pecado mortal, são necessárias simultaneamente três condições (CIC §§ 1857–1859):',
+  conditions: [
+    { title: 'Matéria grave', text: 'a conduta escolhida viola gravemente a lei moral.' },
+    { title: 'Plena consciência', text: 'a pessoa conhece suficientemente o caráter gravemente pecaminoso da conduta.' },
+    { title: 'Consentimento deliberado', text: 'a pessoa escolhe praticar o ato com liberdade suficiente.' },
+  ],
+  reflectionIntroduction: 'Para refletir sobre cada falta identificada, pergunte-se:',
+  reflection: [
+    { title: 'OBJETO', text: 'o que escolhi fazer ou deixar de fazer?' },
+    { title: 'INTENÇÃO', text: 'para que fiz isso?' },
+    { title: 'CIRCUNSTÂNCIAS', text: 'em quais condições pratiquei a conduta?' },
+    { title: 'CONHECIMENTO', text: 'eu sabia que era gravemente errado?' },
+    { title: 'CONSENTIMENTO', text: 'escolhi livre e deliberadamente agir assim?' },
+    { title: 'ATENUANTES', text: 'alguma circunstância reduziu minha consciência ou minha liberdade?' },
+    { title: 'AGRAVANTES', text: 'existiram circunstâncias que tornaram o ato objetivamente mais grave ou revelaram maior malícia?' },
+  ],
+  reminders: [
+    'Lembre-se: o pecado mortal não pode ser identificado apenas pela gravidade objetiva da conduta. Também exige pleno conhecimento e consentimento deliberado.',
+    'Um ato objetivamente desordenado pode, em determinadas circunstâncias, não ser pessoalmente imputável. Não tente solucionar sozinho todas as dúvidas complexas: apresente-as ao confessor.',
+  ],
+  preparationTitle: 'PREPARAÇÃO PARA A CONFISSÃO',
+  preparationIntroduction: 'Depois de realizar o exame de consciência, reflita sobre quatro questões:',
+  preparation: [
+    { title: 'Reconhecimento', text: 'quais pecados preciso confessar?' },
+    { title: 'Arrependimento', text: 'estou sinceramente arrependido das faltas que cometi?' },
+    { title: 'Propósito de emenda', text: 'desejo abandonar esses pecados e buscar meios concretos para evitar sua repetição?' },
+    { title: 'Reparação', text: 'existe alguma injustiça que preciso corrigir ou algum dano que devo procurar reparar?' },
+  ],
+  notes: [
+    'Se desejar, faça anotações pessoais para levar ao confessionário.',
+    'Elas não precisam ser apresentadas ao catequista nem entregues a outra pessoa.',
+  ],
+};
+
 
 function createSession(audience = 'adults') {
   if (!audiences.some((item) => item.id === audience)) throw new RangeError('Faixa etária inválida');
@@ -35064,6 +35268,7 @@ function currentQuestion(session) {
     text: question.pergunta,
     explanation: question.explicacao,
     cic: question.fundamentacaoCic,
+    applicability: question.aplicabilidade || applicabilityNotices[question.id] || '',
     position: commandments.slice(0, session.index).reduce((total, item) => total + item.questions[session.audience].length, 0) + session.questionIndex + 1,
     total: commandments.reduce((total, item) => total + item.questions[session.audience].length, 0),
   };
@@ -35091,6 +35296,18 @@ function selectTheme(session, index) {
   session.index = index;
   const unanswered = commandments[index].questions[session.audience].findIndex((question) => !session.answers.has(question.id));
   session.questionIndex = unanswered < 0 ? 0 : unanswered;
+}
+
+function selectQuestion(session, id) {
+  for (const [index, theme] of commandments.entries()) {
+    const questionIndex = theme.questions[session.audience].findIndex((question) => question.id === id);
+    if (questionIndex >= 0) {
+      session.index = index;
+      session.questionIndex = questionIndex;
+      return;
+    }
+  }
+  throw new RangeError('Pergunta inválida para este perfil');
 }
 
 function answerGroups(session) {
@@ -35174,7 +35391,7 @@ async function createReflectionPdf({ groups, note, password, fontBytes }) {
       let number = 0;
       for (const group of groups) {
         doc.fontSize(12);
-        const heading = `${group.numeral} · ${group.title}`;
+        const heading = [group.numeral, group.title].filter(Boolean).join(' · ');
         const headingHeight = doc.heightOfString(heading, { width });
         doc.fontSize(10.5);
         const firstHeight = group.questions.length ? doc.heightOfString(`${number + 1}. ${group.questions[0].text}`, { width, lineGap: 3 }) : 0;
@@ -35252,15 +35469,15 @@ function header(route) {
 
 function footer(route) {
   const examActive = ['preparacao', 'exame', 'resumo'].includes(route);
-  return `<nav class="bottom-nav" aria-label="Navegação principal"><a href="#inicio" ${route === 'inicio' ? 'aria-current="page"' : ''}>${icon('home')}<span>Início</span></a><a href="${nextLink()}" aria-label="${session.started ? 'Continuar exame' : 'Começar meu exame'}" ${examActive ? 'aria-current="page"' : ''}>${icon('cross')}<span>Exame</span></a><a href="#oracoes" ${route === 'oracoes' ? 'aria-current="page"' : ''}>${icon('book')}<span>Orações</span></a><a href="#guia" aria-label="Como se confessar" ${route === 'guia' ? 'aria-current="page"' : ''}>${icon('guide')}<span>Confissão</span></a></nav>`;
+  return `<nav class="bottom-nav" aria-label="Navegação principal"><a href="#inicio" ${['inicio', 'dicas'].includes(route) ? 'aria-current="page"' : ''}>${icon('home')}<span>Início</span></a><a href="${nextLink()}" aria-label="${session.started ? 'Continuar exame' : 'Começar meu exame'}" ${examActive ? 'aria-current="page"' : ''}>${icon('cross')}<span>Exame</span></a><a href="#oracoes" ${route === 'oracoes' ? 'aria-current="page"' : ''}>${icon('book')}<span>Orações</span></a><a href="#guia" aria-label="Como se confessar" ${route === 'guia' ? 'aria-current="page"' : ''}>${icon('guide')}<span>Confissão</span></a></nav>`;
 }
 
 function home() {
   const complete = session.started && session.answers.size === currentQuestion(session).total;
   const label = complete ? 'Ver minhas respostas' : session.started ? 'Continuar meu exame' : 'Preparar meu coração';
   return `<section class="container app-home"><div class="home-heading"><p class="eyebrow">UM TEMPO PARA A SUA ALMA</p><h1>Todo recomeço<br>começa por <em>dentro.</em></h1></div>
-    <section class="start-card"><span class="start-symbol">${icon('cross')}</span><p class="eyebrow">EXAME DE CONSCIÊNCIA</p><h2>${complete ? 'Um passo em direção ao encontro.' : session.started ? 'Seu momento continua aqui.' : 'Acolha um novo começo.'}</h2><p>${session.started ? `${session.answers.size} de ${currentQuestion(session).total} perguntas percorridas. Siga no seu tempo.` : 'Um caminho de oração e reflexão para preparar seu coração para a confissão.'}</p><a class="button" href="${complete ? '#resumo' : nextLink()}">${label} ${icon('arrow')}</a><span class="start-detail">30 perguntas · Sem pressa</span></section>
-    <div class="home-shortcuts"><a href="#oracoes" aria-label="Abrir orações"><span class="card-icon">${icon('book')}</span><span><strong>Orações</strong><small>Palavras para o encontro</small></span>${icon('chevron')}</a><a href="#guia" aria-label="Ver guia da confissão"><span class="card-icon">${icon('guide')}</span><span><strong>Como se confessar</strong><small>Um passo de cada vez</small></span>${icon('chevron')}</a></div>
+    <section class="start-card"><span class="start-symbol">${icon('cross')}</span><p class="eyebrow">EXAME DE CONSCIÊNCIA</p><h2>${complete ? 'Um passo em direção ao encontro.' : session.started ? 'Seu momento continua aqui.' : 'Acolha um novo começo.'}</h2><p>${session.started ? `${session.answers.size} de ${currentQuestion(session).total} perguntas percorridas. Siga no seu tempo.` : 'Um caminho de oração e reflexão para preparar seu coração para a confissão.'}</p><a class="button" href="${complete ? '#resumo' : nextLink()}">${label} ${icon('arrow')}</a><span class="start-detail">${currentQuestion(session).total} perguntas · Sem pressa</span></section>
+    <div class="home-shortcuts"><a href="#oracoes" aria-label="Abrir orações"><span class="card-icon">${icon('book')}</span><span><strong>Orações</strong><small>Palavras para o encontro</small></span>${icon('chevron')}</a><a href="#dicas" aria-label="Dicas preparatórias ao exame"><span class="card-icon">${icon('sun')}</span><span><strong>Dicas preparatórias ao exame</strong><small>Um olhar sereno para a consciência</small></span>${icon('chevron')}</a><a href="#guia" aria-label="Ver guia da confissão"><span class="card-icon">${icon('guide')}</span><span><strong>Como se confessar</strong><small>Um passo de cada vez</small></span>${icon('chevron')}</a></div>
     <blockquote class="home-verse"><p>“Criai em mim um coração puro, ó Deus.”</p><cite>Salmo 51(50), 12</cite></blockquote>
     ${!isStandalone() ? `<button class="install-row" data-action="install">${icon('install')}<span><strong>Adicionar à tela inicial</strong><small>Leve o EXAMEN com você</small></span>${icon('chevron')}</button>` : ''}
     <a class="home-privacy" href="#sobre">${icon('lock')} Sua reflexão é privada.</a></section>`;
@@ -35283,9 +35500,10 @@ function examination() {
   const question = currentQuestion(session);
   const previous = session.answers.get(question.id);
   return `<section class="container page-section examination" data-questionnaire-version="${escape(questionnaireVersion)}"><div class="exam-toolbar"><button class="icon-button" data-action="previous" aria-label="${question.position === 1 ? 'Preparação' : 'Pergunta anterior'}">${icon('back')}</button><span>Pergunta <strong>${question.position}</strong> de ${question.total}</span><button class="icon-button" data-prayer="espirito" aria-label="Fazer uma oração">${icon('sun')}</button><button class="icon-button" data-action="reset" aria-label="Encerrar e apagar">${icon('close')}</button></div>
-    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="question-explanation question-cic answer-instruction${previous ? ' current-answer' : ''}">
-      <div class="exam-theme"><p class="eyebrow">${escape(question.id)} · ${session.index + 1}º MANDAMENTO · ${audience().label}</p><h1>${escape(item.title)}</h1><progress value="${question.position}" max="${question.total}" aria-label="Pergunta ${question.position} de ${question.total}">${question.position} de ${question.total}</progress><button class="text-button" data-action="themes">Escolher tema ${icon('chevron')}</button></div>
+    <div class="swipe-card" data-question="${question.id}" role="group" tabindex="0" aria-labelledby="current-question" aria-describedby="${question.applicability ? 'question-applicability ' : ''}question-explanation question-cic answer-instruction${previous ? ' current-answer' : ''}">
+      <div class="exam-theme"><p class="eyebrow">${escape(question.id)} · ${item.kind === 'precepts' ? 'PRECEITOS DA IGREJA' : `${session.index + 1}º MANDAMENTO`} · ${audience().label}</p><h1>${escape(item.title)}</h1><progress value="${question.position}" max="${question.total}" aria-label="Pergunta ${question.position} de ${question.total}">${question.position} de ${question.total}</progress><button class="text-button" data-action="themes">Escolher tema ${icon('chevron')}</button>${item.kind === 'precepts' ? `<div class="precepts-related"><p>A Missa dominical e as festas de preceito estão no 3º Mandamento.</p><button class="text-button" data-review-question="${escape(item.relatedQuestions[session.audience])}">Rever a participação na Missa ${icon('back')}</button></div>` : ''}</div>
       <p class="swipe-question examen-pergunta" id="current-question">${escape(question.text)}</p>
+      ${question.applicability ? `<aside class="question-applicability" role="note" aria-labelledby="applicability-title"><h2 id="applicability-title">ANTES DE RESPONDER</h2><p id="question-applicability">${escape(question.applicability).replace(/\bPULAR\b/g, '<strong>PULAR</strong>')}</p></aside>` : ''}
       <section class="question-detail" aria-labelledby="explanation-title"><h2 id="explanation-title">EXPLICAÇÃO</h2><p class="question-explanation examen-explicacao" id="question-explanation">${escape(question.explanation)}</p></section>
       <section class="question-detail" aria-labelledby="cic-title"><h2 id="cic-title">FUNDAMENTAÇÃO NO CIC</h2><p class="examen-cic" id="question-cic">${escape(question.cic)}</p></section>
     </div>
@@ -35299,7 +35517,7 @@ function summary() {
   const groups = answerGroups(session);
   return `<section class="container page-section">${steps(2)}<div class="page-heading"><p class="eyebrow">UM NOVO COMEÇO</p><h1>Leve ao encontro.<br>Confie na misericórdia.</h1><p>A reflexão é um passo. Agora, procure um sacerdote para celebrar o Sacramento da Reconciliação.</p></div>
     <div class="summary-layout"><div><div class="summary-heading"><h2>Seus pontos de reflexão</h2><a href="#exame" class="text-button">Revisar exame ${icon('back')}</a></div><p class="field-description">Estas são suas respostas, incluindo as perguntas puladas. Sim e Não se referem ao texto de cada pergunta; nenhuma resposta é classificada automaticamente como pecado.</p>
-    ${groups.length ? groups.map((group) => `<section class="summary-group"><h3><span>${group.numeral}</span>${group.title}</h3><ul>${group.questions.map((question) => `<li class="summary-answer"><p>${escape(question.text)}</p><span class="answer-badge" data-value="${question.answer}">${answerLabels[question.answer]}</span></li>`).join('')}</ul></section>`).join('') : `<div class="empty-state">${icon('cross')}<h3>Um espaço para o que está no coração.</h3><p>Você ainda não registrou respostas. Pode voltar às perguntas ou seguir com a preparação para a confissão.</p><a class="text-button" href="#exame">Voltar às reflexões ${icon('arrow')}</a></div>`}
+    ${groups.length ? groups.map((group) => `<section class="summary-group"><h3>${group.numeral ? `<span>${group.numeral}</span>` : ''}${group.title}</h3><ul>${group.questions.map((question) => `<li class="summary-answer"><p>${escape(question.text)}</p><span class="answer-badge" data-value="${question.answer}">${answerLabels[question.answer]}</span></li>`).join('')}</ul></section>`).join('') : `<div class="empty-state">${icon('cross')}<h3>Um espaço para o que está no coração.</h3><p>Você ainda não registrou respostas. Pode voltar às perguntas ou seguir com a preparação para a confissão.</p><a class="text-button" href="#exame">Voltar às reflexões ${icon('arrow')}</a></div>`}
     <div class="note-field"><label for="private-note">Algo mais que você quer recordar?</label><p id="note-help" class="field-description">Anotação opcional, apenas nesta aba. Evite nomes ou informações de outras pessoas.</p><textarea id="private-note" maxlength="2000" rows="5" placeholder="Escreva uma lembrança ou um propósito de mudança…" aria-describedby="note-help" autocomplete="off" spellcheck="false">${escape(session.note)}</textarea><span class="note-counter"><span id="note-count">${session.note.length}</span>/2000</span></div>
     <div class="pdf-export"><button class="button secondary" data-action="export-pdf">${icon('lock')} Gerar PDF com senha</button><p class="field-description">O PDF é criado neste aparelho. A cópia que você salvar permanece após encerrar o exame.</p><p id="pdf-status" class="field-description" role="status"></p></div>
     <div class="notice">${icon('lock')}<p>Deixe esta aba aberta para consultar. Recarregar ou encerrar apaga as respostas e anotações desta aba.</p></div></div>
@@ -35314,12 +35532,22 @@ function prayerPage() {
   return `<section class="container page-section"><div class="page-heading"><p class="eyebrow">PALAVRAS PARA O ENCONTRO</p><h1>Quando o coração<br>se faz oração.</h1><p>Você também pode rezar com suas próprias palavras. O importante é se colocar, com confiança, na presença de Deus.</p></div><div class="prayer-grid">${prayers.map((prayer, i) => `<article class="prayer-tile"><span class="card-icon">${icon(['sun', 'cross', 'book'][i])}</span><p class="eyebrow">${prayer.label}</p><h2>${prayer.title}</h2><p>${escape(prayer.text.split('\n\n')[0])}</p><button class="button secondary" data-prayer="${prayer.id}">Ler e rezar ${icon('arrow')}</button></article>`).join('')}</div></section>`;
 }
 
-function about() {
-  return `<section class="container page-section prose"><p class="eyebrow">SOBRE O EXAMEN</p><h1>Um auxílio à reflexão.<br>Um cuidado com você.</h1><h2>Para que serve este aplicativo?</h2><p>O EXAMEN auxilia o exame de consciência e a preparação para o Sacramento da Reconciliação na Igreja Católica Apostólica Romana. As perguntas são organizadas pelos Dez Mandamentos, com percursos para crianças, jovens e adultos.</p><p>O aplicativo não avalia a gravidade dos pecados, não determina culpa, não dá absolvição e não substitui a orientação de um sacerdote. As perguntas são pontos de reflexão, e não uma lista exaustiva. Pensamentos involuntários, sentimentos e experiências sofridas não são, por si, escolhas culpáveis.</p><h2>Sua intimidade, preservada</h2><ul><li>Não há cadastro, publicidade, analytics ou envio de respostas.</li><li>Respostas, faixa etária e anotações existem somente na memória desta aba.</li><li>Não usamos cookies, armazenamento local ou banco de dados para guardar seu exame.</li><li>Você pode gerar um PDF protegido por senha neste aparelho. Essa cópia permanece onde você a salvar, mesmo após encerrar o exame. O aplicativo não guarda a senha e não pode recuperá-la.</li><li>Recarregar a página ou escolher “Encerrar e apagar” elimina a sessão. Ao sair, encerre o exame se estiver em um dispositivo compartilhado.</li><li>O aplicativo carrega seus arquivos do servidor, mas nenhuma resposta é enviada. As telas e orações podem ser guardadas no aparelho para uso sem internet. As respostas e anotações não são incluídas nesse armazenamento. Não carrega fontes, imagens ou serviços de terceiros.</li></ul><h2>Um olhar sereno para a consciência</h2><p>Não é necessário responder todas as perguntas nem ficar repetindo o exame para alcançar certeza absoluta. Se a reflexão provocar dúvidas repetitivas ou angústia, procure a orientação de um sacerdote de confiança. Para crianças, um responsável ou catequista pode acompanhar a leitura respeitando sua intimidade.</p><h2>Referências para a preparação</h2><p>O conteúdo é uma proposta introdutória, não uma publicação oficial da Igreja. Deve receber revisão pastoral antes de uma publicação para uma comunidade.</p><ul><li>Catecismo da Igreja Católica, §§ 1422–1498: o Sacramento da Penitência e da Reconciliação.</li><li>Catecismo da Igreja Católica, §§ 2052–2557: os Dez Mandamentos.</li><li>Código de Direito Canônico, cân. 989: confissão dos pecados graves ao menos uma vez ao ano, após chegar à idade da discrição.</li></ul><a class="button primary" href="${nextLink()}">Ir ao exame ${icon('arrow')}</a></section>`;
+function preparationTipsPage() {
+  const advice = preparationAdvice;
+  const items = (list) => list.map((item) => `<li><strong>${escape(item.title)}:</strong> ${escape(item.text)}</li>`).join('');
+  return `<section class="container page-section tips-page"><a class="text-button" href="#inicio">${icon('back')} Voltar ao início</a><div class="page-heading"><p class="eyebrow">UM OLHAR SINCERO E SERENO</p><h1>Dicas preparatórias ao exame</h1></div>
+    <section class="tips-section" aria-labelledby="conditions-title"><h2 id="conditions-title">As condições do pecado mortal</h2><p>${escape(advice.introduction)}</p><ol class="tips-list tips-conditions">${items(advice.conditions)}</ol></section>
+    <section class="tips-section" aria-labelledby="reflection-title"><h2 id="reflection-title">Para refletir sobre cada falta</h2><p>${escape(advice.reflectionIntroduction)}</p><ul class="tips-list tips-reflection">${items(advice.reflection)}</ul><div class="tips-reminders">${advice.reminders.map((text) => `<p>${escape(text)}</p>`).join('')}</div></section>
+    <hr class="tips-divider"><section class="tips-section" aria-labelledby="confession-preparation-title"><h2 id="confession-preparation-title">${escape(advice.preparationTitle)}</h2><p>${escape(advice.preparationIntroduction)}</p><ol class="tips-list tips-preparation">${items(advice.preparation)}</ol><div class="tips-notes">${advice.notes.map((text) => `<p>${escape(text)}</p>`).join('')}</div></section>
+    <a class="button primary tips-continue" href="${nextLink()}">${session.started ? 'Continuar meu exame' : 'Preparar meu coração'} ${icon('arrow')}</a></section>`;
 }
 
-const pages = { inicio: home, preparacao: preparation, exame: examination, resumo: summary, guia: guide, oracoes: prayerPage, sobre: about };
-const titles = { inicio: 'Exame de consciência', preparacao: 'Prepare o coração', exame: 'Reflexão', resumo: 'Preparação para a confissão', guia: 'Como se confessar', oracoes: 'Orações', sobre: 'Sobre e privacidade' };
+function about() {
+  return `<section class="container page-section prose"><p class="eyebrow">SOBRE O EXAMEN</p><h1>Um auxílio à reflexão.<br>Um cuidado com você.</h1><h2>Para que serve este aplicativo?</h2><p>O EXAMEN auxilia o exame de consciência e a preparação para o Sacramento da Reconciliação na Igreja Católica Apostólica Romana. As perguntas são organizadas pelos Dez Mandamentos e pelos Preceitos da Igreja, com percursos para crianças, jovens e adultos.</p><p>O aplicativo não avalia a gravidade dos pecados, não determina culpa, não dá absolvição e não substitui a orientação de um sacerdote. As perguntas são pontos de reflexão, e não uma lista exaustiva. Pensamentos involuntários, sentimentos e experiências sofridas não são, por si, escolhas culpáveis.</p><h2>Sua intimidade, preservada</h2><ul><li>Não há cadastro, publicidade, analytics ou envio de respostas.</li><li>Respostas, faixa etária e anotações existem somente na memória desta aba.</li><li>Não usamos cookies, armazenamento local ou banco de dados para guardar seu exame.</li><li>Você pode gerar um PDF protegido por senha neste aparelho. Essa cópia permanece onde você a salvar, mesmo após encerrar o exame. O aplicativo não guarda a senha e não pode recuperá-la.</li><li>Recarregar a página ou escolher “Encerrar e apagar” elimina a sessão. Ao sair, encerre o exame se estiver em um dispositivo compartilhado.</li><li>O aplicativo carrega seus arquivos do servidor, mas nenhuma resposta é enviada. As telas e orações podem ser guardadas no aparelho para uso sem internet. As respostas e anotações não são incluídas nesse armazenamento. Não carrega fontes, imagens ou serviços de terceiros.</li></ul><h2>Um olhar sereno para a consciência</h2><p>Não é necessário responder todas as perguntas nem ficar repetindo o exame para alcançar certeza absoluta. Se a reflexão provocar dúvidas repetitivas ou angústia, procure a orientação de um sacerdote de confiança. Para crianças, um responsável ou catequista pode acompanhar a leitura respeitando sua intimidade.</p><h2>Referências para a preparação</h2><p>O conteúdo é uma proposta introdutória, não uma publicação oficial da Igreja. Deve receber revisão pastoral antes de uma publicação para uma comunidade.</p><ul><li>Catecismo da Igreja Católica, §§ 1422–1498: o Sacramento da Penitência e da Reconciliação.</li><li>Catecismo da Igreja Católica, §§ 2052–2557: os Dez Mandamentos.</li><li>Código de Direito Canônico, cân. 989: confissão dos pecados graves ao menos uma vez ao ano, após chegar à idade da discrição.</li></ul><a class="button primary" href="${nextLink()}">Ir ao exame ${icon('arrow')}</a></section>`;
+}
+
+const pages = { inicio: home, preparacao: preparation, exame: examination, resumo: summary, guia: guide, oracoes: prayerPage, dicas: preparationTipsPage, sobre: about };
+const titles = { inicio: 'Exame de consciência', preparacao: 'Prepare o coração', exame: 'Reflexão', resumo: 'Preparação para a confissão', guia: 'Como se confessar', oracoes: 'Orações', dicas: 'Dicas preparatórias ao exame', sobre: 'Sobre e privacidade' };
 function currentRoute() { return location.hash.slice(1) || 'inicio'; }
 
 function render({ focus = true } = {}) {
@@ -35362,7 +35590,7 @@ function submitAnswer(answer) {
 
 function showThemes() {
   const dialog = document.querySelector('#themes-dialog');
-  dialog.innerHTML = `<div class="dialog-top"><h2 id="themes-title">Seu caminho de reflexão</h2><button class="icon-button" data-action="close-themes" aria-label="Fechar temas">${icon('close')}</button></div><p class="field-description">${escape(commandments[session.index].intro)}</p><nav class="commandment-nav" aria-label="Temas do exame">${commandments.map((item, index) => `<button data-index="${index}" ${index === session.index ? 'aria-current="step"' : ''}><span>${item.numeral}</span>${item.short}${icon('chevron')}</button>`).join('')}</nav>`;
+  dialog.innerHTML = `<div class="dialog-top"><h2 id="themes-title">Seu caminho de reflexão</h2><button class="icon-button" data-action="close-themes" aria-label="Fechar temas">${icon('close')}</button></div><p class="field-description">${escape(commandments[session.index].intro)}</p><nav class="commandment-nav" aria-label="Temas do exame">${commandments.map((item, index) => `<button data-index="${index}" ${index === session.index ? 'aria-current="step"' : ''}><span>${item.numeral || icon('book')}</span>${item.short}${icon('chevron')}</button>`).join('')}</nav>`;
   dialog.showModal();
 }
 
@@ -35514,6 +35742,8 @@ document.addEventListener('click', (event) => {
   }
   const prayerButton = event.target.closest('[data-prayer]');
   if (prayerButton) { showPrayer(prayerButton.dataset.prayer, prayerButton.hasAttribute('data-confession-guide')); return; }
+  const reviewButton = event.target.closest('[data-review-question]');
+  if (reviewButton) { selectQuestion(session, reviewButton.dataset.reviewQuestion); render(); return; }
   const indexButton = event.target.closest('[data-index]');
   if (indexButton) { selectTheme(session, Number(indexButton.dataset.index)); document.querySelector('#themes-dialog').close(); render(); return; }
   const answerButton = event.target.closest('[data-answer]');
@@ -35579,7 +35809,7 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) render({ f
 window.addEventListener('hashchange', () => { closePdfDialog(); for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close(); render(); });
 render({ focus: false });
 </script>
-  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="EXAMEN" /><meta name="recomeco-version" content="d410336c2bcfd20b5842" /></head>
+  <meta name="robots" content="noindex, nofollow" /><meta name="recomeco-preview" content="true" /><link rel="manifest" href="./manifest.webmanifest" /><link rel="apple-touch-icon" href="./icons/app-192.png" /><meta name="apple-mobile-web-app-capable" content="yes" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta name="apple-mobile-web-app-title" content="EXAMEN" /><meta name="recomeco-version" content="f9d3a4a63ac43d447c64" /></head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div id="app"><main class="container page-section"><p class="eyebrow">EXAMEN</p><div class="page-heading"><h1>Seu momento de reflexão.</h1><p>Se o aplicativo não iniciar, feche esta visualização e abra novamente o resultado atualizado.</p></div></main></div>
